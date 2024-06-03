@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../_img/logo.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.25">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6543a935.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -1462,10 +1462,11 @@
 
 
 
-  <div class="doc doc-contents first">
-  
+    <div class="doc doc-contents first">
+
       <p>A receiver that sends a message regularly.</p>
 <h2 id="frequenz.channels.timer--quick-start">Quick Start<a class="headerlink" href="#frequenz.channels.timer--quick-start" title="Permanent link">¤</a></h2>
+
 
 <details class="info" open>
   <summary>Important</summary>
@@ -1476,6 +1477,7 @@ drifting</a> before using timers in production.</p>
 </details>      <p>If you need to do something as periodically as possible (avoiding
 <a href="#frequenz.channels.timer--missed-ticks-and-drifting">drifts</a>), you can use
 a <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a> like this:</p>
+
 
 <details class="example" open>
   <summary>Periodic Timer Example</summary>
@@ -1499,6 +1501,7 @@ for every missed tick.</p>
 </details>      <p>If, instead, you need a timeout, for example to abort waiting for other receivers after
 a certain amount of time, you can use a <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a> like
 this:</p>
+
 
 <details class="example" open>
   <summary>Timeout Example</summary>
@@ -1550,7 +1553,7 @@ a <em>missing tick policy</em>.</p>
     A policy that triggers all the missed ticks immediately until it catches up.</li>
 </ul>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1566,7 +1569,7 @@ a <em>missing tick policy</em>.</p>
 
   </div>
 
-  </div>
+    </div>
 
 </div><h3 id="policies">Policies<a class="headerlink" href="#policies" title="Permanent link">¤</a></h3>
 <h4 id="skip-missed-and-drift">Skip Missed And Drift<a class="headerlink" href="#skip-missed-and-drift" title="Permanent link">¤</a></h4>
@@ -1577,9 +1580,9 @@ a <em>missing tick policy</em>.</p>
 
 
 
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
+
       <p>A policy that drops all the missed ticks, triggers immediately and resets.</p>
 <p>The <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndDrift"><code>SkipMissedAndDrift</code></a> policy will
 behave effectively as if the timer was
@@ -1589,6 +1592,7 @@ delayed. Only the relative drift will be returned on each tick.</p>
 <p>The reset happens only if the delay is larger than the
 <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndDrift.delay_tolerance">delay tolerance</a>, so it
 is possible to ignore small delays and not drift in those cases.</p>
+
 
 <details class="example" open>
   <summary>Example</summary>
@@ -1623,7 +1627,7 @@ is possible to ignore small delays and not drift in those cases.</p>
 <p></center></p>
 </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1639,8 +1643,7 @@ is possible to ignore small delays and not drift in those cases.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div><h4 id="skip-missed-and-re-sync">Skip Missed And Re-Sync<a class="headerlink" href="#skip-missed-and-re-sync" title="Permanent link">¤</a></h4>
 
@@ -1650,9 +1653,9 @@ is possible to ignore small delays and not drift in those cases.</p>
 
 
 
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
+
       <p>A policy that drops all the missed ticks, triggers immediately and resyncs.</p>
 <p>If ticks are missed, the
 <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndResync"><code>SkipMissedAndResync</code></a> policy will
@@ -1660,6 +1663,7 @@ make the <a class="autorefs autorefs-internal" href="../../../reference/frequenz
 schedule to trigger again on the next multiple of the
 <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.interval">interval</a>, effectively skipping any missed
 ticks, but re-syncing with the original start time.</p>
+
 
 <details class="example" open>
   <summary>Example</summary>
@@ -1696,7 +1700,7 @@ ticks, but re-syncing with the original start time.</p>
 <p></center></p>
 </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1712,8 +1716,7 @@ ticks, but re-syncing with the original start time.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div><h4 id="trigger-all-missed">Trigger All Missed<a class="headerlink" href="#trigger-all-missed" title="Permanent link">¤</a></h4>
 
@@ -1723,9 +1726,9 @@ ticks, but re-syncing with the original start time.</p>
 
 
 
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
+
       <p>A policy that triggers all the missed ticks immediately until it catches up.</p>
 <p>The <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.TriggerAllMissed"><code>TriggerAllMissed</code></a> policy will
 trigger all missed ticks immediately until it catches up with the current time.
@@ -1733,6 +1736,7 @@ This means that if the timer is delayed for any reason, when it finally gets som
 time to run, it will trigger all the missed ticks in a burst. The drift is not
 accumulated and the next tick will be scheduled according to the original start
 time.</p>
+
 
 <details class="example" open>
   <summary>Example</summary>
@@ -1772,7 +1776,7 @@ time.</p>
 <p></center></p>
 </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1788,8 +1792,7 @@ time.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div><h2 id="timer">Timer<a class="headerlink" href="#timer" title="Permanent link">¤</a></h2>
 
@@ -1799,9 +1802,9 @@ time.</p>
 
 
 
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
+
       <p>A receiver that sends a message regularly.</p>
 <p><a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a>s are started by default after they are
 created. This can be disabled by using <code>auto_start=False</code> option when creating
@@ -1828,6 +1831,7 @@ running when it should trigger, the timer will be delayed. In this case the
 drift will be positive. A negative drift should be technically impossible,
 as the timer uses <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio"><code>asyncio</code></a>s loop monotonic clock.</p>
 
+
 <details class="warning" open>
   <summary>Warning</summary>
   <p>Even when the <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio"><code>asyncio</code></a> loop's monotonic clock is a <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a>, timers use
@@ -1843,7 +1847,7 @@ ticks might or might not trigger a message and the drift could be accumulated or
 depending on the chosen policy.</p>
 
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1859,8 +1863,7 @@ depending on the chosen policy.</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div><h2 id="custom-missed-tick-policies">Custom Missed Tick Policies<a class="headerlink" href="#custom-missed-tick-policies" title="Permanent link">¤</a></h2>
 
@@ -1870,14 +1873,15 @@ depending on the chosen policy.</p>
 
 
 
-  <div class="doc doc-contents first">
+    <div class="doc doc-contents first">
 
-  
+
       <p>A policy to handle timer missed ticks.</p>
 <p>To implement a custom policy you need to subclass
 <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.MissedTickPolicy"><code>MissedTickPolicy</code></a> and implement the
 <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.MissedTickPolicy.calculate_next_tick_time"><code>calculate_next_tick_time</code></a>
 method.</p>
+
 
 <details class="example" open>
   <summary>Example</summary>
@@ -1903,7 +1907,7 @@ tick is missed:</p>
 </span></code></pre></div>
 </details>
 
-  
+
 
   <div class="doc doc-children">
 
@@ -1919,8 +1923,7 @@ tick is missed:</p>
 
   </div>
 
-  </div>
-
+    </div>
 
 </div>
 
@@ -2048,7 +2051,7 @@ tick is missed:</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.081f42fc.min.js"></script>
       
     
   </body>
