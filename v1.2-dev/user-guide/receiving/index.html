@@ -1295,6 +1295,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#frequenz.channels._receiver--message-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Filtering
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#frequenz.channels._receiver--error-handling" class="md-nav__link">
     <span class="md-ellipsis">
       Error Handling
@@ -1366,6 +1375,15 @@ sequence, you can use the <a class="autorefs autorefs-internal" href="../../refe
 </span></code></pre></div>
 <p><a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.Receiver.map"><code>map()</code></a> returns a new full receiver, so you can
 use it in any of the ways described above.</p>
+<h2 id="frequenz.channels._receiver--message-filtering">Message Filtering<a class="headerlink" href="#frequenz.channels._receiver--message-filtering" title="Permanent link">¤</a></h2>
+<p>If you need to filter the received messages, receivers provide a
+<a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.Receiver.filter"><code>filter()</code></a> method to easily do so:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">async</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">receiver</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>  <span class="c1"># Only even numbers will be printed</span>
+</span></code></pre></div>
+<p>As with <a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.Receiver.map"><code>map()</code></a>,
+<a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.Receiver.filter"><code>filter()</code></a> returns a new full receiver, so you can
+use it in any of the ways described above.</p>
 <h2 id="frequenz.channels._receiver--error-handling">Error Handling<a class="headerlink" href="#frequenz.channels._receiver--error-handling" title="Permanent link">¤</a></h2>
 <div class="admonition tip inline end">
 <p class="admonition-title">Tip</p>
@@ -1379,23 +1397,23 @@ interface.</p>
 <p>If the receiver has completely stopped (for example the underlying channel was
 closed), a <a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.ReceiverStoppedError"><code>ReceiverStoppedError</code></a> exception
 is raised by <a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.Receiver.receive"><code>receive()</code></a> method.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">try</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">await</span> <span class="n">receiver</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">except</span> <span class="n">ReceiverStoppedError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The receiver was stopped&quot;</span><span class="p">)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">except</span> <span class="n">ReceiverError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was an error trying to receive: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">await</span> <span class="n">receiver</span><span class="o">.</span><span class="n">receive</span><span class="p">()</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">except</span> <span class="n">ReceiverStoppedError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The receiver was stopped&quot;</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">except</span> <span class="n">ReceiverError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was an error trying to receive: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <p>When used as an async iterator, the iteration will just stop without raising an
 exception:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">try</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">async</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">receiver</span><span class="p">:</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">except</span> <span class="n">ReceiverStoppedError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Will never happen&quot;</span><span class="p">)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">except</span> <span class="n">ReceiverError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was an error trying to receive: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># If we get here, the receiver was stopped</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">async</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">receiver</span><span class="p">:</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">except</span> <span class="n">ReceiverStoppedError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Will never happen&quot;</span><span class="p">)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="k">except</span> <span class="n">ReceiverError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was an error trying to receive: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># If we get here, the receiver was stopped</span>
 </span></code></pre></div>
 <h2 id="frequenz.channels._receiver--advanced-usage">Advanced Usage<a class="headerlink" href="#frequenz.channels._receiver--advanced-usage" title="Permanent link">¤</a></h2>
 <div class="admonition warning inline end">
