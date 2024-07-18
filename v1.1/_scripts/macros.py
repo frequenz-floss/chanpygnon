@@ -6,8 +6,7 @@
 from typing import Any
 
 import markdown as md
-from griffe import Object
-from griffe.collections import ModulesCollection
+from griffe import ModulesCollection, Object
 from markdown.extensions import toc
 from mkdocs_macros import plugin as macros
 from mkdocstrings_handlers.python.handler import PythonHandler
