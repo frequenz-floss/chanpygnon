@@ -1410,7 +1410,18 @@ to watch for.</p>
 <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/file_watcher/#frequenz.channels.file_watcher.Event.type"><code>type</code></a> of change that was observed and
 the <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/file_watcher/#frequenz.channels.file_watcher.Event.path"><code>path</code></a> where the change was
 observed.</p>
-<h2 id="frequenz.channels.file_watcher.FileWatcher--event-types">Event Types<a class="headerlink" href="#frequenz.channels.file_watcher.FileWatcher--event-types" title="Permanent link">¤</a></h2>
+
+
+<details class="note" open>
+  <summary>Note</summary>
+  <p>The owner of the <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/file_watcher/#frequenz.channels.file_watcher.FileWatcher"><code>FileWatcher</code></a>
+receiver is responsible for recreating the <code>FileWatcher</code> after it has been
+cancelled or stopped.
+For example, if a <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio-task.html#asyncio.Task"><code>Task</code></a> uses an asynchronous iterator to consume
+events from the <code>FileWatcher</code> and the task is cancelled, the <code>FileWatcher</code> will
+also stop. Therefore, the same <code>FileWatcher</code> instance cannot be reused for a new
+task to consume events. In this case, a new FileWatcher instance must be created.</p>
+</details>      <h2 id="frequenz.channels.file_watcher.FileWatcher--event-types">Event Types<a class="headerlink" href="#frequenz.channels.file_watcher.FileWatcher--event-types" title="Permanent link">¤</a></h2>
 <p>The following event types are available:</p>
 <ul>
 <li><a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/file_watcher/#frequenz.channels.file_watcher.EventType.CREATE"><code>CREATE</code></a>:
