@@ -43,10 +43,10 @@ dev-flake8 = [
   "pydoclint == 0.5.9",
   "pydocstyle == 6.3.0",
 ]
-dev-formatting = ["black == 24.8.0", "isort == 5.13.2"]
+dev-formatting = ["black == 24.10.0", "isort == 5.13.2"]
 dev-mkdocs = [
   "Markdown == 3.7",
-  "black == 24.8.0",
+  "black == 24.10.0",
   "frequenz-repo-config[lib] == 0.10.0",
   "markdown-callouts == 0.4.0",
   "markdown-svgbob == 202406.1023",
@@ -54,19 +54,19 @@ dev-mkdocs = [
   "mkdocs-gen-files == 0.5.0",
   "mkdocs-include-markdown-plugin == 7.0.0",
   "mkdocs-literate-nav == 0.6.1",
-  "mkdocs-macros-plugin == 1.2.0",
-  "mkdocs-material == 9.5.39",
-  "mkdocstrings[python] == 0.26.1",
-  "mkdocstrings-python == 1.11.1",
+  "mkdocs-macros-plugin == 1.3.7",
+  "mkdocs-material == 9.5.43",
+  "mkdocstrings[python] == 0.26.2",
+  "mkdocstrings-python == 1.12.2",
   "pymdownx-superfence-filter-lines == 0.1.0",
 ]
 dev-mypy = [
   # For checking the noxfile, docs/ script, and tests
   "frequenz-channels[dev-mkdocs,dev-noxfile,dev-pytest]",
-  "mypy == 1.11.2",
+  "mypy == 1.13.0",
   "types-Markdown == 3.7.0.20240822",
 ]
-dev-noxfile = ["nox == 2024.4.15", "frequenz-repo-config[lib] == 0.10.0"]
+dev-noxfile = ["nox == 2024.10.9", "frequenz-repo-config[lib] == 0.10.0"]
 dev-pylint = [
   # For checking the noxfile, docs/ script, and tests
   "frequenz-channels[dev-mkdocs,dev-noxfile,dev-pytest]",
@@ -75,7 +75,7 @@ dev-pylint = [
 dev-pytest = [
   "async-solipsism == 0.7",
   "frequenz-repo-config[extra-lint-examples] == 0.10.0",
-  "hypothesis == 6.112.2",
+  "hypothesis == 6.116.0",
   "pytest == 8.3.3",
   "pytest-asyncio == 0.24.0",
   "pytest-mock == 3.14.0",
