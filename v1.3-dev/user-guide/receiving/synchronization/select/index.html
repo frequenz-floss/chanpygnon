@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../../_img/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -1398,7 +1398,7 @@
 
     <div class="doc doc-contents first">
 
-      <p>Select the first among multiple Receivers.</p>
+        <p>Select the first among multiple Receivers.</p>
 <h2 id="frequenz.channels._select--usage">Usage<a class="headerlink" href="#frequenz.channels._select--usage" title="Permanent link">¤</a></h2>
 <p>If you need to receiver different types of messages from different receivers, you need
 to know the source of a particular received message to know the type of the message.</p>
@@ -1435,7 +1435,7 @@ the if-chain and do nothing with the message:</p>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">if</span> <span class="n">selected_from</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">receiver2</span><span class="p">):</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received from receiver2, length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">selected</span><span class="o">.</span><span class="n">message</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
-</details>      <h2 id="frequenz.channels._select--stopping">Stopping<a class="headerlink" href="#frequenz.channels._select--stopping" title="Permanent link">¤</a></h2>
+</details>        <h2 id="frequenz.channels._select--stopping">Stopping<a class="headerlink" href="#frequenz.channels._select--stopping" title="Permanent link">¤</a></h2>
 <p>The <code>select()</code> async iterator will stop as soon as all the receivers are stopped. You
 can also end the iteration early by breaking out of the loop as normal.</p>
 <p>When a single <a class="autorefs autorefs-internal" href="../../../../reference/frequenz/channels/#frequenz.channels.Receiver">receiver</a> is stopped, it will be reported
@@ -1458,14 +1458,14 @@ selected <a class="autorefs autorefs-internal" href="../../../../reference/frequ
 convenience method that is equivalent to checking if the
 <a class="autorefs autorefs-internal" href="../../../../reference/frequenz/channels/#frequenz.channels.Selected.exception"><code>exception</code></a> attribute is an instance of
 <a class="autorefs autorefs-internal" href="../../../../reference/frequenz/channels/#frequenz.channels.ReceiverStoppedError"><code>ReceiverStoppedError</code></a>.</p>
-</details>      <h2 id="frequenz.channels._select--error-handling">Error Handling<a class="headerlink" href="#frequenz.channels._select--error-handling" title="Permanent link">¤</a></h2>
+</details>        <h2 id="frequenz.channels._select--error-handling">Error Handling<a class="headerlink" href="#frequenz.channels._select--error-handling" title="Permanent link">¤</a></h2>
 
 
 <details class="tip" open>
   <summary>Tip</summary>
   <p>For more information about handling errors, please refer to the
 <a href="/user-guide/error-handling/">Error Handling</a> section of the user guide.</p>
-</details>      <p>If a receiver raises an exception while receiving a message, the exception will be
+</details>        <p>If a receiver raises an exception while receiving a message, the exception will be
 raised by the <a class="autorefs autorefs-internal" href="../../../../reference/frequenz/channels/#frequenz.channels.Selected.message"><code>message</code></a> attribute of the
 <a class="autorefs autorefs-internal" href="../../../../reference/frequenz/channels/#frequenz.channels.Selected"><code>Selected</code></a> object.</p>
 <p>You can use a try-except block to handle exceptions as usual:</p>
@@ -1625,10 +1625,10 @@ exception that was raised by the receiver.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.525ec568.min.js"></script>
       
     
   </body>
