@@ -159,6 +159,11 @@ class FileWatcher(Receiver[Event]):
             watch_filter=self._filter_events,
             force_polling=force_polling,
             poll_delay_ms=int(polling_interval.total_seconds() * 1_000),
+            # The underlying Rust code performs periodic checks to see if it should stop watching.
+            # These checks raise TimeoutError, which by default would log misleading debug messages.
+            # Setting yield_on_timeout=True makes it yield an empty set instead of printing debug
+            # logs. We handle these empty sets in the `ready()` method by continuing to wait.
+            yield_on_timeout=True,
         )
         self._awatch_stopped_exc: Exception | None = None
         self._changes: set[FileChange] = set()
@@ -204,11 +209,13 @@ class FileWatcher(Receiver[Event]):
         if self._awatch_stopped_exc is not None:
             return False
 
-        try:
-            self._changes = await anext(self._awatch)
-        except StopAsyncIteration as err:
-            self._awatch_stopped_exc = err
-            return False
+        # awatch will yield an empty set if rust notify timeout is reached.
+        while len(self._changes) == 0:
+            try:
+                self._changes = await anext(self._awatch)
+            except StopAsyncIteration as err:
+                self._awatch_stopped_exc = err
+                return False
 
         return True
 

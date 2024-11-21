@@ -102,6 +102,7 @@ async def test_file_watcher_filter_events(
                 watch_filter=filter_events,
                 force_polling=True,
                 poll_delay_ms=1_000,
+                yield_on_timeout=True,
             )
         ]
         for event_type in EventType:
