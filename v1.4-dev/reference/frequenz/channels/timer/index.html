@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../../../_img/logo.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -2397,6 +2397,11 @@ a <em>missing tick policy</em>.</p>
 
 
 
+
+
+
+
+
   <div class="doc doc-children">
 
 
@@ -2452,6 +2457,11 @@ tick is missed:</p>
 </span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </span></code></pre></div>
 </details>
+
+
+
+
+
               <details class="quote">
                 <summary>Source code in <code>frequenz/channels/timer.py</code></summary>
                 <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-123">123</a></span>
@@ -2644,7 +2654,9 @@ and handle them according to <code>missed_tick_policy</code>.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>interval</code></td>
+            <td>
+                <code>interval</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The interval between ticks (in microseconds).</p>
@@ -2658,7 +2670,9 @@ and handle them according to <code>missed_tick_policy</code>.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>scheduled_tick_time</code></td>
+            <td>
+                <code>scheduled_tick_time</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The time the current tick was scheduled to
@@ -2673,7 +2687,9 @@ trigger (in microseconds).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>now</code></td>
+            <td>
+                <code>now</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The current loop time (in microseconds).</p>
@@ -2828,6 +2844,11 @@ is possible to ignore small delays and not drift in those cases.</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="584" height="144">    <style>        line, path, circle,rect,polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}            </style>    <defs>        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,0 0,4 4,2 0,0"></polygon>        </marker>        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>        </marker>        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="filled"></circle>        </marker>        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>        </marker>        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>        </marker>    </defs>    <rect class="backdrop" x="0" y="0" width="584" height="144"></rect>    <text x="2" y="28" >0</text>    <text x="82" y="28" >1</text>    <text x="162" y="28" >2</text>    <text x="242" y="28" >3</text>    <text x="322" y="28" >4</text>    <text x="402" y="28" >5</text>    <text x="482" y="28" >6</text>    <circle cx="4" cy="40" r="3" class="filled"></circle>    <line x1="8" y1="40" x2="80" y2="40" class="solid"></line>    <circle cx="84" cy="40" r="3" class="nofill"></circle>    <line x1="88" y1="40" x2="96" y2="40" class="solid"></line>    <circle cx="100" cy="40" r="3" class="filled"></circle>    <line x1="104" y1="40" x2="176" y2="40" class="solid"></line>    <line x1="164" y1="32" x2="164" y2="48" class="solid"></line>    <circle cx="180" cy="40" r="3" class="nofill"></circle>    <circle cx="188" cy="40" r="3" class="filled"></circle>    <line x1="192" y1="40" x2="256" y2="40" class="solid"></line>    <line x1="244" y1="32" x2="244" y2="48" class="solid"></line>    <circle cx="260" cy="40" r="4" class="nofill"></circle>    <line x1="264" y1="40" x2="336" y2="40" class="solid"></line>    <line x1="324" y1="32" x2="324" y2="48" class="solid"></line>    <circle cx="340" cy="40" r="3" class="nofill"></circle>    <circle cx="348" cy="40" r="3" class="filled"></circle>    <line x1="352" y1="40" x2="424" y2="40" class="solid"></line>    <line x1="404" y1="32" x2="404" y2="48" class="solid"></line>    <circle cx="428" cy="40" r="3" class="filled"></circle>    <line x1="432" y1="40" x2="504" y2="40" class="solid"></line>    <line x1="484" y1="32" x2="484" y2="48" class="solid"></line>    <circle cx="508" cy="40" r="3" class="filled"></circle>    <text x="2" y="60" >T0</text>    <text x="98" y="60" >T1.2</text>    <text x="186" y="60" >T2.2</text>    <text x="258" y="60" >T3.2</text>    <text x="346" y="60" >T4.2</text>    <text x="426" y="60" >T5.3</text>    <text x="506" y="60" >T6.3</text>    <text x="546" y="44" >time</text>    <line x1="0" y1="88" x2="8" y2="88" class="solid"></line>    <circle cx="12" cy="88" r="3" class="nofill"></circle>    <line x1="16" y1="88" x2="24" y2="88" class="solid"></line>    <line x1="0" y1="104" x2="8" y2="104" class="solid"></line>    <circle cx="12" cy="104" r="3" class="filled"></circle>    <line x1="16" y1="104" x2="24" y2="104" class="solid"></line>    <line x1="0" y1="120" x2="8" y2="120" class="solid"></line>    <circle cx="12" cy="120" r="4" class="nofill"></circle>    <line x1="16" y1="120" x2="24" y2="120" class="solid"></line>    <text x="34" y="92" >Expected ticks</text>    <text x="34" y="108" >Delivered ticks</text>    <text x="34" y="124" >Undelivered ticks (skipped)</text>    <g>        <line x1="512" y1="40" x2="528" y2="40" class="solid"></line>        <polygon points="528,36 536,40 528,44" class="filled"></polygon>    </g></svg></p>
 <p></center></p>
 </details>
+
+
+
+
+
               <details class="quote">
                 <summary>Source code in <code>frequenz/channels/timer.py</code></summary>
                 <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-315">315</a></span>
@@ -3081,7 +3102,7 @@ is possible to ignore small delays and not drift in those cases.</p>
 
 
 <a href="#frequenz.channels.timer.SkipMissedAndDrift.__init__" class="headerlink" title="Permanent link">¤</a></h6>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="nf">delay_tolerance</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="nf">delay_tolerance</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3099,7 +3120,9 @@ is possible to ignore small delays and not drift in those cases.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>delay_tolerance</code></td>
+            <td>
+                <code>delay_tolerance</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The maximum delay that is tolerated before
@@ -3278,7 +3301,9 @@ avoid small drifts).</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>now</code></td>
+            <td>
+                <code>now</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The current loop time (in microseconds).</p>
@@ -3292,7 +3317,9 @@ avoid small drifts).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>scheduled_tick_time</code></td>
+            <td>
+                <code>scheduled_tick_time</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The time the current tick was scheduled to
@@ -3307,7 +3334,9 @@ trigger (in microseconds).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>interval</code></td>
+            <td>
+                <code>interval</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The interval between ticks (in microseconds).</p>
@@ -3467,6 +3496,11 @@ ticks, but re-syncing with the original start time.</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="584" height="144">    <style>        line, path, circle,rect,polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}            </style>    <defs>        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,0 0,4 4,2 0,0"></polygon>        </marker>        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>        </marker>        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="filled"></circle>        </marker>        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>        </marker>        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>        </marker>    </defs>    <rect class="backdrop" x="0" y="0" width="584" height="144"></rect>    <text x="2" y="28" >0</text>    <text x="82" y="28" >1</text>    <text x="162" y="28" >2</text>    <text x="242" y="28" >3</text>    <text x="322" y="28" >4</text>    <text x="354" y="28" >T4</text>    <text x="402" y="28" >5</text>    <text x="482" y="28" >6</text>    <circle cx="4" cy="40" r="3" class="filled"></circle>    <line x1="8" y1="40" x2="80" y2="40" class="solid"></line>    <circle cx="84" cy="40" r="3" class="nofill"></circle>    <line x1="88" y1="40" x2="96" y2="40" class="solid"></line>    <circle cx="100" cy="40" r="3" class="filled"></circle>    <line x1="104" y1="40" x2="160" y2="40" class="solid"></line>    <circle cx="164" cy="40" r="3" class="nofill"></circle>    <line x1="168" y1="40" x2="184" y2="40" class="solid"></line>    <circle cx="188" cy="40" r="3" class="filled"></circle>    <line x1="192" y1="40" x2="240" y2="40" class="solid"></line>    <circle cx="244" cy="40" r="3" class="nofill"></circle>    <line x1="248" y1="40" x2="320" y2="40" class="solid"></line>    <circle cx="324" cy="40" r="3" class="nofill"></circle>    <line x1="328" y1="40" x2="344" y2="40" class="solid"></line>    <circle cx="348" cy="40" r="3" class="filled"></circle>    <circle cx="356" cy="40" r="4" class="nofill"></circle>    <line x1="360" y1="40" x2="400" y2="40" class="solid"></line>    <circle cx="404" cy="40" r="3" class="nofill"></circle>    <line x1="408" y1="40" x2="416" y2="40" class="solid"></line>    <circle cx="420" cy="40" r="3" class="filled"></circle>    <line x1="424" y1="40" x2="480" y2="40" class="solid"></line>    <circle cx="484" cy="40" r="3" class="filled"></circle>    <text x="2" y="60" >T0</text>    <text x="98" y="60" >T1</text>    <text x="186" y="60" >T2</text>    <text x="346" y="60" >T3</text>    <text x="418" y="60" >T5</text>    <text x="482" y="60" >T6</text>    <text x="546" y="44" >time</text>    <line x1="0" y1="88" x2="8" y2="88" class="solid"></line>    <circle cx="12" cy="88" r="3" class="nofill"></circle>    <line x1="16" y1="88" x2="24" y2="88" class="solid"></line>    <line x1="0" y1="104" x2="8" y2="104" class="solid"></line>    <circle cx="12" cy="104" r="3" class="filled"></circle>    <line x1="16" y1="104" x2="24" y2="104" class="solid"></line>    <line x1="0" y1="120" x2="8" y2="120" class="solid"></line>    <circle cx="12" cy="120" r="4" class="nofill"></circle>    <line x1="16" y1="120" x2="24" y2="120" class="solid"></line>    <text x="34" y="92" >Expected ticks</text>    <text x="34" y="108" >Delivered ticks</text>    <text x="34" y="124" >Undelivered ticks (skipped)</text>    <g>        <line x1="488" y1="40" x2="528" y2="40" class="solid"></line>        <polygon points="528,36 536,40 528,44" class="filled"></polygon>    </g></svg></p>
 <p></center></p>
 </details>
+
+
+
+
+
               <details class="quote">
                 <summary>Source code in <code>frequenz/channels/timer.py</code></summary>
                 <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-248">248</a></span>
@@ -3669,7 +3703,9 @@ ticks, but re-syncing with the original start time.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>now</code></td>
+            <td>
+                <code>now</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The current loop time (in microseconds).</p>
@@ -3683,7 +3719,9 @@ ticks, but re-syncing with the original start time.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>scheduled_tick_time</code></td>
+            <td>
+                <code>scheduled_tick_time</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The time the current tick was scheduled to
@@ -3698,7 +3736,9 @@ trigger (in microseconds).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>interval</code></td>
+            <td>
+                <code>interval</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The interval between ticks (in microseconds).</p>
@@ -3849,6 +3889,11 @@ which can lead to issues that are very hard to reproduce and debug.</p>
 <a class="autorefs autorefs-internal" href="#frequenz.channels.timer.Timer.missed_tick_policy"><code>missed_tick_policy</code></a>. Missing
 ticks might or might not trigger a message and the drift could be accumulated or not
 depending on the chosen policy.</p>
+
+
+
+
+
 
               <details class="quote">
                 <summary>Source code in <code>frequenz/channels/timer.py</code></summary>
@@ -4832,7 +4877,7 @@ depending on the chosen policy.</p>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">/</span><span class="p">,</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">*</span><span class="p">,</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">auto_start</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">start_delay</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">start_delay</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">loop</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="asyncio.AbstractEventLoop" href="https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.AbstractEventLoop">AbstractEventLoop</a></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </span></code></pre></div>
@@ -4852,7 +4897,9 @@ depending on the chosen policy.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>interval</code></td>
+            <td>
+                <code>interval</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The time between timer ticks. Must be at least
@@ -4867,7 +4914,9 @@ depending on the chosen policy.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>missed_tick_policy</code></td>
+            <td>
+                <code>missed_tick_policy</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The policy of the timer when it misses a tick.
@@ -4884,7 +4933,9 @@ documentation of the each class for more details.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>auto_start</code></td>
+            <td>
+                <code>auto_start</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>Whether the timer should be started when the
@@ -4905,7 +4956,9 @@ was passed.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>start_delay</code></td>
+            <td>
+                <code>start_delay</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The delay before the timer should start. If <code>auto_start</code> is
@@ -4925,7 +4978,9 @@ anything smaller than a microsecond means no delay.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>loop</code></td>
+            <td>
+                <code>loop</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The event loop to use to track time. If <code>None</code>,
@@ -5384,6 +5439,17 @@ time when it actually did.</p>
 
 
 <a href="#frequenz.channels.timer.Timer.filter" class="headerlink" title="Permanent link">¤</a></h6>
+          <div class="doc-overloads">
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">filter</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nf">filter_function</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="collections.abc.Callable" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable">Callable</a></span><span class="p">[</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="frequenz.channels._generic.ReceiverMessageT_co" href="../#frequenz.channels.ReceiverMessageT_co">ReceiverMessageT_co</a></span><span class="p">],</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n"><a class="autorefs autorefs-external" title="typing.TypeGuard" href="https://docs.python.org/3/library/typing.html#typing.TypeGuard">TypeGuard</a></span><span class="p">[</span><span class="n"><span title="frequenz.channels._receiver.FilteredMessageT_co">FilteredMessageT_co</span></span><span class="p">],</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="p">]</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="frequenz.channels._receiver.Receiver" href="../#frequenz.channels.Receiver">Receiver</a></span><span class="p">[</span><span class="n"><span title="frequenz.channels._receiver.FilteredMessageT_co">FilteredMessageT_co</span></span><span class="p">]</span>
+</span></code></pre></div><div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">filter</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nf">filter_function</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="collections.abc.Callable" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable">Callable</a></span><span class="p">[[</span><span class="n"><a class="autorefs autorefs-internal" title="frequenz.channels._generic.ReceiverMessageT_co" href="../#frequenz.channels.ReceiverMessageT_co">ReceiverMessageT_co</a></span><span class="p">],</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span><span class="p">]</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n"><a class="autorefs autorefs-internal" title="frequenz.channels._receiver.Receiver" href="../#frequenz.channels.Receiver">Receiver</a></span><span class="p">[</span><span class="n"><a class="autorefs autorefs-internal" title="frequenz.channels._generic.ReceiverMessageT_co" href="../#frequenz.channels.ReceiverMessageT_co">ReceiverMessageT_co</a></span><span class="p">]</span>
+</span></code></pre></div>          </div>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">filter</span><span class="p">(</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="nf">filter_function</span><span class="p">:</span> <span class="p">(</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="n"><a class="autorefs autorefs-external" title="collections.abc.Callable" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Callable">Callable</a></span><span class="p">[[</span><span class="n"><a class="autorefs autorefs-internal" title="frequenz.channels._generic.ReceiverMessageT_co" href="../#frequenz.channels.ReceiverMessageT_co">ReceiverMessageT_co</a></span><span class="p">],</span> <span class="n"><a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#bool">bool</a></span><span class="p">]</span>
@@ -5426,7 +5492,9 @@ original receiver and use that instead.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>filter_function</code></td>
+            <td>
+                <code>filter_function</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The function to be applied on incoming messages to
@@ -5567,7 +5635,9 @@ original receiver and use that instead.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mapping_function</code></td>
+            <td>
+                <code>mapping_function</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The function to be applied on incoming messages.</p>
@@ -6016,7 +6086,7 @@ until it is consumed.</p>
 <div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">reset</span><span class="p">(</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="o">*</span><span class="p">,</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">interval</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">start_delay</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">=</span> <span class="n">timedelta</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">start_delay</span><span class="p">:</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-external" title="datetime.timedelta" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta">timedelta</a></span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 </span></code></pre></div>
 
@@ -6037,7 +6107,9 @@ more details.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>interval</code></td>
+            <td>
+                <code>interval</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The new interval between ticks. If <code>None</code>, the current
@@ -6056,7 +6128,9 @@ interval is kept.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>start_delay</code></td>
+            <td>
+                <code>start_delay</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The delay before the timer should start. This has microseconds
@@ -6284,7 +6358,9 @@ selected in <code>select()</code> iteration.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>selected</code></td>
+            <td>
+                <code>selected</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The result of a <code>select()</code> iteration.</p>
@@ -6447,6 +6523,11 @@ time.</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="584" height="128">    <style>        line, path, circle,rect,polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}            </style>    <defs>        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,0 0,4 4,2 0,0"></polygon>        </marker>        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>        </marker>        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="filled"></circle>        </marker>        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>        </marker>        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>        </marker>    </defs>    <rect class="backdrop" x="0" y="0" width="584" height="128"></rect>    <text x="2" y="28" >0</text>    <text x="82" y="28" >1</text>    <text x="162" y="28" >2</text>    <text x="242" y="28" >3</text>    <text x="322" y="28" >4</text>    <text x="354" y="28" >T4</text>    <text x="402" y="28" >5</text>    <text x="482" y="28" >6</text>    <circle cx="4" cy="40" r="3" class="filled"></circle>    <line x1="8" y1="40" x2="80" y2="40" class="solid"></line>    <circle cx="84" cy="40" r="3" class="nofill"></circle>    <line x1="88" y1="40" x2="96" y2="40" class="solid"></line>    <circle cx="100" cy="40" r="3" class="filled"></circle>    <line x1="104" y1="40" x2="160" y2="40" class="solid"></line>    <circle cx="164" cy="40" r="3" class="nofill"></circle>    <line x1="168" y1="40" x2="184" y2="40" class="solid"></line>    <circle cx="188" cy="40" r="3" class="filled"></circle>    <line x1="192" y1="40" x2="240" y2="40" class="solid"></line>    <circle cx="244" cy="40" r="3" class="nofill"></circle>    <line x1="248" y1="40" x2="320" y2="40" class="solid"></line>    <circle cx="324" cy="40" r="3" class="nofill"></circle>    <line x1="328" y1="40" x2="344" y2="40" class="solid"></line>    <circle cx="348" cy="40" r="3" class="filled"></circle>    <circle cx="356" cy="40" r="3" class="filled"></circle>    <line x1="360" y1="40" x2="400" y2="40" class="solid"></line>    <circle cx="404" cy="40" r="3" class="nofill"></circle>    <circle cx="412" cy="40" r="3" class="filled"></circle>    <line x1="416" y1="40" x2="480" y2="40" class="solid"></line>    <circle cx="484" cy="40" r="3" class="filled"></circle>    <text x="2" y="60" >T0</text>    <text x="98" y="60" >T1</text>    <text x="186" y="60" >T2</text>    <text x="346" y="60" >T3</text>    <text x="410" y="60" >T5</text>    <text x="482" y="60" >T6</text>    <text x="546" y="44" >time</text>    <line x1="0" y1="88" x2="8" y2="88" class="solid"></line>    <circle cx="12" cy="88" r="3" class="nofill"></circle>    <line x1="16" y1="88" x2="24" y2="88" class="solid"></line>    <line x1="0" y1="104" x2="8" y2="104" class="solid"></line>    <circle cx="12" cy="104" r="3" class="filled"></circle>    <line x1="16" y1="104" x2="24" y2="104" class="solid"></line>    <text x="34" y="92" >Expected ticks</text>    <text x="34" y="108" >Delivered ticks</text>    <g>        <line x1="488" y1="40" x2="528" y2="40" class="solid"></line>        <polygon points="528,36 536,40 528,44" class="filled"></polygon>    </g></svg></p>
 <p></center></p>
 </details>
+
+
+
+
+
               <details class="quote">
                 <summary>Source code in <code>frequenz/channels/timer.py</code></summary>
                 <div class="language-python highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-182">182</a></span>
@@ -6648,7 +6729,9 @@ ticks need to produce a trigger event.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>now</code></td>
+            <td>
+                <code>now</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The current loop time (in microseconds).</p>
@@ -6662,7 +6745,9 @@ ticks need to produce a trigger event.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>scheduled_tick_time</code></td>
+            <td>
+                <code>scheduled_tick_time</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The time the current tick was scheduled to
@@ -6677,7 +6762,9 @@ trigger (in microseconds).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>interval</code></td>
+            <td>
+                <code>interval</code>
+            </td>
             <td class="doc-param-details">
               <div class="doc-md-description">
                 <p>The interval between ticks (in microseconds).</p>
@@ -6901,7 +6988,7 @@ trigger (in microseconds).</p>
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
     
   </body>
