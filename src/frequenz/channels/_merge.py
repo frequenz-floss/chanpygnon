@@ -191,6 +191,21 @@ class Merger(Receiver[ReceiverMessageT_co]):
 
         return self._results.popleft()
 
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        for task in self._pending:
+            if not task.done() and task.get_loop().is_running():
+                task.cancel()
+        self._pending = set()
+        for recv in self._receivers.values():
+            recv.close()
+
     def __str__(self) -> str:
         """Return a string representation of this receiver."""
         if len(self._receivers) > 3:

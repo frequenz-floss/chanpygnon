@@ -232,6 +232,11 @@ class FileWatcher(Receiver[Event]):
         change, path_str = self._changes.pop()
         return Event(type=EventType(change), path=pathlib.Path(path_str))
 
+    @override
+    def close(self) -> None:
+        """Close this receiver."""
+        self._stop_event.set()
+
     def __str__(self) -> str:
         """Return a string representation of this receiver."""
         if len(self._paths) > 3:

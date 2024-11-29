@@ -217,6 +217,15 @@ class Receiver(ABC, Generic[ReceiverMessageT_co]):
             ReceiverError: If there is some problem with the receiver.
         """
 
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be available from the receiver.
+        Once the receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        raise NotImplementedError("close() must be implemented by subclasses")
+
     def __aiter__(self) -> Self:
         """Get an async iterator over the received messages.
 
@@ -464,6 +473,16 @@ class _Mapper(
         """
         return self._mapping_function(self._receiver.consume())
 
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        self._receiver.close()
+
     def __str__(self) -> str:
         """Return a string representation of the mapper."""
         return f"{type(self).__name__}:{self._receiver}:{self._mapping_function}"
@@ -552,6 +571,16 @@ class _Filter(Receiver[ReceiverMessageT_co], Generic[ReceiverMessageT_co]):
         message = self._next_message
         self._next_message = _SENTINEL
         return message
+
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        self._receiver.close()
 
     def __str__(self) -> str:
         """Return a string representation of the filter."""

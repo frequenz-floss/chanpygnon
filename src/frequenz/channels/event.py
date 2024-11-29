@@ -172,6 +172,11 @@ class Event(Receiver[None]):
         self._is_set = False
         self._event.clear()
 
+    @override
+    def close(self) -> None:
+        """Close this receiver."""
+        self.stop()
+
     def __str__(self) -> str:
         """Return a string representation of this event."""
         return f"{type(self).__name__}({self._name!r})"

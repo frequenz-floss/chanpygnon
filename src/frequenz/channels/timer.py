@@ -745,6 +745,11 @@ class Timer(Receiver[timedelta]):
         self._current_drift = None
         return drift
 
+    @override
+    def close(self) -> None:
+        """Close the timer."""
+        self.stop()
+
     def _now(self) -> int:
         """Return the current monotonic clock time in microseconds.
 

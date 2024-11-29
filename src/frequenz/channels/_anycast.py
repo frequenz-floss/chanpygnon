@@ -391,6 +391,9 @@ class _Receiver(Receiver[_T]):
         self._channel: Anycast[_T] = channel
         """The channel that this receiver belongs to."""
 
+        self._closed: bool = False
+        """Whether the receiver is closed."""
+
         self._next: _T | type[_Empty] = _Empty
 
     @override
@@ -408,6 +411,9 @@ class _Receiver(Receiver[_T]):
         # if a message is already ready, then return immediately.
         if self._next is not _Empty:
             return True
+
+        if self._closed:
+            return False
 
         # pylint: disable=protected-access
         while len(self._channel._deque) == 0:
@@ -436,6 +442,9 @@ class _Receiver(Receiver[_T]):
         ):
             raise ReceiverStoppedError(self) from ChannelClosedError(self._channel)
 
+        if self._next is _Empty and self._closed:
+            raise ReceiverStoppedError(self)
+
         assert (
             self._next is not _Empty
         ), "`consume()` must be preceded by a call to `ready()`"
@@ -445,6 +454,14 @@ class _Receiver(Receiver[_T]):
         self._next = _Empty
 
         return next_val
+
+    @override
+    def close(self) -> None:
+        """Close this receiver.
+
+        After closing, the receiver will not be able to receive any more messages.
+        """
+        self._closed = True
 
     def __str__(self) -> str:
         """Return a string representation of this receiver."""

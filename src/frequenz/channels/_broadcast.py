@@ -417,6 +417,9 @@ class _Receiver(Receiver[_T]):
         self._q: deque[_T] = deque(maxlen=limit)
         """The receiver's internal message queue."""
 
+        self._closed: bool = False
+        """Whether the receiver is closed."""
+
     def enqueue(self, message: _T, /) -> None:
         """Put a message into this receiver's queue.
 
@@ -466,7 +469,7 @@ class _Receiver(Receiver[_T]):
         # consumed, then we return immediately.
         # pylint: disable=protected-access
         while len(self._q) == 0:
-            if self._channel._closed:
+            if self._channel._closed or self._closed:
                 return False
             async with self._channel._recv_cv:
                 await self._channel._recv_cv.wait()
@@ -486,8 +489,24 @@ class _Receiver(Receiver[_T]):
         if not self._q and self._channel._closed:  # pylint: disable=protected-access
             raise ReceiverStoppedError(self) from ChannelClosedError(self._channel)
 
+        if self._closed:
+            raise ReceiverStoppedError(self)
+
         assert self._q, "`consume()` must be preceded by a call to `ready()`"
         return self._q.popleft()
+
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        self._closed = True
+        self._channel._receivers.pop(  # pylint: disable=protected-access
+            hash(self), None
+        )
 
     def __str__(self) -> str:
         """Return a string representation of this receiver."""
