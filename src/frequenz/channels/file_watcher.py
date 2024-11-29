@@ -25,6 +25,7 @@ from dataclasses import dataclass
 from datetime import timedelta
 from enum import Enum
 
+from typing_extensions import override
 from watchfiles import Change, awatch
 from watchfiles.main import FileChange
 
@@ -185,6 +186,7 @@ class FileWatcher(Receiver[Event]):
         # is stopped.
         self._stop_event.set()
 
+    @override
     async def ready(self) -> bool:
         """Wait until the receiver is ready with a message or an error.
 
@@ -212,6 +214,7 @@ class FileWatcher(Receiver[Event]):
 
         return True
 
+    @override
     def consume(self) -> Event:
         """Return the latest event once `ready` is complete.
 

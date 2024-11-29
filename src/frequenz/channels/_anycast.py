@@ -10,6 +10,8 @@ from asyncio import Condition
 from collections import deque
 from typing import Generic, TypeVar
 
+from typing_extensions import override
+
 from ._exceptions import ChannelClosedError
 from ._generic import ChannelMessageT
 from ._receiver import Receiver, ReceiverStoppedError
@@ -320,6 +322,7 @@ class _Sender(Sender[_T]):
         self._channel: Anycast[_T] = channel
         """The channel that this sender belongs to."""
 
+    @override
     async def send(self, message: _T, /) -> None:
         """Send a message across the channel.
 
@@ -390,6 +393,7 @@ class _Receiver(Receiver[_T]):
 
         self._next: _T | type[_Empty] = _Empty
 
+    @override
     async def ready(self) -> bool:
         """Wait until the receiver is ready with a message or an error.
 
@@ -417,6 +421,7 @@ class _Receiver(Receiver[_T]):
         # pylint: enable=protected-access
         return True
 
+    @override
     def consume(self) -> _T:
         """Return the latest message once `ready()` is complete.
 

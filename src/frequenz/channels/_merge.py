@@ -54,6 +54,8 @@ import itertools
 from collections import deque
 from typing import Any
 
+from typing_extensions import override
+
 from ._generic import ReceiverMessageT_co
 from ._receiver import Receiver, ReceiverStoppedError
 
@@ -135,6 +137,7 @@ class Merger(Receiver[ReceiverMessageT_co]):
         await asyncio.gather(*self._pending, return_exceptions=True)
         self._pending = set()
 
+    @override
     async def ready(self) -> bool:
         """Wait until the receiver is ready with a message or an error.
 
@@ -171,6 +174,7 @@ class Merger(Receiver[ReceiverMessageT_co]):
                     asyncio.create_task(anext(self._receivers[name]), name=name)
                 )
 
+    @override
     def consume(self) -> ReceiverMessageT_co:
         """Return the latest message once `ready` is complete.
 
