@@ -135,6 +135,8 @@ disable = [
   "unsubscriptable-object",
   # Checked by mypy
   "no-member",
+  "possibly-used-before-assignment",
+  "no-name-in-module",
   # Checked by flake8
   "f-string-without-interpolation",
   "redefined-outer-name",
