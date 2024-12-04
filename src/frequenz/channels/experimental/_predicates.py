@@ -20,7 +20,7 @@ class _Sentinel:
 _SENTINEL: Final[_Sentinel] = _Sentinel()
 
 
-class OnlyIfPrevious(Generic[ChannelMessageT]):
+class WithPrevious(Generic[ChannelMessageT]):
     """A predicate to check if a message has a particular relationship with the previous one.
 
     This predicate can be used to filter out messages based on a custom condition on the
@@ -31,10 +31,10 @@ class OnlyIfPrevious(Generic[ChannelMessageT]):
     Example: Receiving only messages that are not the same instance as the previous one.
         ```python
         from frequenz.channels import Broadcast
-        from frequenz.channels.experimental import OnlyIfPrevious
+        from frequenz.channels.experimental import WithPrevious
 
         channel = Broadcast[int | bool](name="example")
-        receiver = channel.new_receiver().filter(OnlyIfPrevious(lambda old, new: old is not new))
+        receiver = channel.new_receiver().filter(WithPrevious(lambda old, new: old is not new))
         sender = channel.new_sender()
 
         # This message will be received as it is the first message.
@@ -53,11 +53,11 @@ class OnlyIfPrevious(Generic[ChannelMessageT]):
     Example: Receiving only messages if they are bigger than the previous one.
         ```python
         from frequenz.channels import Broadcast
-        from frequenz.channels.experimental import OnlyIfPrevious
+        from frequenz.channels.experimental import WithPrevious
 
         channel = Broadcast[int](name="example")
         receiver = channel.new_receiver().filter(
-            OnlyIfPrevious(lambda old, new: new > old, first_is_true=False)
+            WithPrevious(lambda old, new: new > old, first_is_true=False)
         )
         sender = channel.new_sender()
 

@@ -4,4 +4,4 @@
 
 ### Experimental
 
-- A new predicate, `OnlyIfPrevious`, to `filter()` messages based on the previous message.
+- A new composable predicate, `WithPrevious`, to filter messages based on the previous message.
