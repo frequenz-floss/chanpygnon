@@ -28,26 +28,25 @@ class WithPrevious(Generic[ChannelMessageT]):
     process messages only if they satisfy a particular condition with respect to the
     previous message.
 
-    Example: Receiving only messages that are not the same instance as the previous one.
+    Example: Receiving only messages that are different from the previous one.
         ```python
         from frequenz.channels import Broadcast
         from frequenz.channels.experimental import WithPrevious
 
-        channel = Broadcast[int | bool](name="example")
-        receiver = channel.new_receiver().filter(WithPrevious(lambda old, new: old is not new))
+        channel = Broadcast[int](name="example")
+        receiver = channel.new_receiver().filter(WithPrevious(lambda old, new: old != new))
         sender = channel.new_sender()
 
         # This message will be received as it is the first message.
         await sender.send(1)
         assert await receiver.receive() == 1
 
-        # This message will be skipped as it is the same instance as the previous one.
+        # This message will be skipped as it equals to the previous one.
         await sender.send(1)
 
-        # This message will be received as it is a different instance from the previous
-        # one.
-        await sender.send(True)
-        assert await receiver.receive() is True
+        # This message will be received as it is a different from the previous one.
+        await sender.send(0)
+        assert await receiver.receive() == 0
         ```
 
     Example: Receiving only messages if they are bigger than the previous one.
