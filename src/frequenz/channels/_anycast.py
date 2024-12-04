@@ -71,8 +71,8 @@ class Anycast(Generic[ChannelMessageT]):
 
     To create a new [senders][frequenz.channels.Sender] and
     [receivers][frequenz.channels.Receiver] you can use the
-    [`new_sender()`][frequenz.channels.Broadcast.new_sender] and
-    [`new_receiver()`][frequenz.channels.Broadcast.new_receiver] methods
+    [`new_sender()`][frequenz.channels.Anycast.new_sender] and
+    [`new_receiver()`][frequenz.channels.Anycast.new_receiver] methods
     respectively.
 
     When the channel is not needed anymore, it should be closed with the
