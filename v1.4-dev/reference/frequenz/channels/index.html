@@ -3007,8 +3007,8 @@ messages, depending on how tasks are schduled.</p>
 then you will have to implement it yourself.</p>
 <p>To create a new <a class="autorefs autorefs-internal" href="#frequenz.channels.Sender">senders</a> and
 <a class="autorefs autorefs-internal" href="#frequenz.channels.Receiver">receivers</a> you can use the
-<a class="autorefs autorefs-internal" href="#frequenz.channels.Broadcast.new_sender"><code>new_sender()</code></a> and
-<a class="autorefs autorefs-internal" href="#frequenz.channels.Broadcast.new_receiver"><code>new_receiver()</code></a> methods
+<a class="autorefs autorefs-internal" href="#frequenz.channels.Anycast.new_sender"><code>new_sender()</code></a> and
+<a class="autorefs autorefs-internal" href="#frequenz.channels.Anycast.new_receiver"><code>new_receiver()</code></a> methods
 respectively.</p>
 <p>When the channel is not needed anymore, it should be closed with the
 <a class="autorefs autorefs-internal" href="#frequenz.channels.Anycast.close"><code>close()</code></a> method. This will prevent further
@@ -3460,8 +3460,8 @@ might appear interleaved in a different way):</p>
 </span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a>
 </span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72"></a><span class="sd">    To create a new [senders][frequenz.channels.Sender] and</span>
 </span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73"></a><span class="sd">    [receivers][frequenz.channels.Receiver] you can use the</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">    [`new_sender()`][frequenz.channels.Broadcast.new_sender] and</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">    [`new_receiver()`][frequenz.channels.Broadcast.new_receiver] methods</span>
+</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">    [`new_sender()`][frequenz.channels.Anycast.new_sender] and</span>
+</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">    [`new_receiver()`][frequenz.channels.Anycast.new_receiver] methods</span>
 </span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">    respectively.</span>
 </span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77"></a>
 </span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">    When the channel is not needed anymore, it should be closed with the</span>
