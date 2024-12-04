@@ -28,10 +28,6 @@ class OnlyIfPrevious(Generic[ChannelMessageT]):
     process messages only if they satisfy a particular condition with respect to the
     previous message.
 
-    Tip:
-        If you want to use `==` as predicate, you can use the
-        [`ChangedOnly`][frequenz.channels.experimental.ChangedOnly] predicate.
-
     Example: Receiving only messages that are not the same instance as the previous one.
         ```python
         from frequenz.channels import Broadcast
@@ -127,58 +123,3 @@ class OnlyIfPrevious(Generic[ChannelMessageT]):
     def __repr__(self) -> str:
         """Return a string representation of this instance."""
         return f"<{type(self).__name__}: {self._predicate!r} first_is_true={self._first_is_true!r}>"
-
-
-class ChangedOnly(OnlyIfPrevious[object]):
-    """A predicate to check if a message is different from the previous one.
-
-    This predicate can be used to filter out messages that are the same as the previous
-    one. This can be useful in cases where you want to avoid processing duplicate
-    messages.
-
-    Warning:
-        This predicate uses the `!=` operator to compare messages, which includes all
-        the weirdnesses of Python's equality comparison (e.g., `1 == 1.0`, `True == 1`,
-        `True == 1.0`, `False == 0` are all `True`).
-
-        If you need to use a different comparison, you can create a custom predicate
-        using [`OnlyIfPrevious`][frequenz.channels.experimental.OnlyIfPrevious].
-
-    Example:
-        ```python
-        from frequenz.channels import Broadcast
-        from frequenz.channels.experimental import ChangedOnly
-
-        channel = Broadcast[int](name="skip_duplicates_test")
-        receiver = channel.new_receiver().filter(ChangedOnly())
-        sender = channel.new_sender()
-
-        # This message will be received as it is the first message.
-        await sender.send(1)
-        assert await receiver.receive() == 1
-
-        # This message will be skipped as it is the same as the previous one.
-        await sender.send(1)
-
-        # This message will be received as it is different from the previous one.
-        await sender.send(2)
-        assert await receiver.receive() == 2
-        ```
-    """
-
-    def __init__(self, *, first_is_true: bool = True) -> None:
-        """Initialize this instance.
-
-        Args:
-            first_is_true: Whether the first message should be considered as different
-                from the previous one. Defaults to `True`.
-        """
-        super().__init__(lambda old, new: old != new, first_is_true=first_is_true)
-
-    def __str__(self) -> str:
-        """Return a string representation of this instance."""
-        return f"{type(self).__name__}"
-
-    def __repr__(self) -> str:
-        """Return a string representation of this instance."""
-        return f"{type(self).__name__}(first_is_true={self._first_is_true!r})"
