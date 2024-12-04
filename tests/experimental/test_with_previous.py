@@ -1,21 +1,21 @@
 # License: MIT
 # Copyright © 2024 Frequenz Energy-as-a-Service GmbH
 
-"""Tests for the OnlyIfPrevious implementation."""
+"""Tests for the WithPrevious implementation."""
 
 from dataclasses import dataclass
 from typing import Callable, Generic, TypeVar
 
 import pytest
 
-from frequenz.channels.experimental import OnlyIfPrevious
+from frequenz.channels.experimental import WithPrevious
 
 _T = TypeVar("_T")
 
 
 @dataclass(frozen=True, kw_only=True)
 class PredicateTestCase(Generic[_T]):
-    """Test case for testing OnlyIfPrevious behavior with different predicates."""
+    """Test case for testing WithPrevious behavior with different predicates."""
 
     title: str
     messages: list[_T]
@@ -113,12 +113,12 @@ PREDICATE_TEST_CASES = [
     ids=lambda test_case: test_case.title,
 )
 def test_only_if_previous(test_case: PredicateTestCase[_T]) -> None:
-    """Test the OnlyIfPrevious with different predicates and sequences.
+    """Test the WithPrevious with different predicates and sequences.
 
     Args:
         test_case: The test case containing the input values and expected results.
     """
-    only_if_previous = OnlyIfPrevious(
+    only_if_previous = WithPrevious(
         test_case.predicate,
         first_is_true=test_case.first_is_true,
     )
@@ -127,9 +127,9 @@ def test_only_if_previous(test_case: PredicateTestCase[_T]) -> None:
 
 
 def test_only_if_previous_state_independence() -> None:
-    """Test that multiple OnlyIfPrevious instances maintain independent state."""
-    only_if_previous1 = OnlyIfPrevious(is_greater)
-    only_if_previous2 = OnlyIfPrevious(is_greater)
+    """Test that multiple WithPrevious instances maintain independent state."""
+    only_if_previous1 = WithPrevious(is_greater)
+    only_if_previous2 = WithPrevious(is_greater)
 
     # First message should be accepted (first_is_true default is True)
     assert only_if_previous1(1) is True
@@ -141,17 +141,17 @@ def test_only_if_previous_state_independence() -> None:
 
 
 def test_only_if_previous_str_representation() -> None:
-    """Test the string representation of OnlyIfPrevious."""
-    only_if_previous = OnlyIfPrevious(is_greater)
-    assert str(only_if_previous) == "OnlyIfPrevious:is_greater"
+    """Test the string representation of WithPrevious."""
+    only_if_previous = WithPrevious(is_greater)
+    assert str(only_if_previous) == "WithPrevious:is_greater"
     assert (
-        repr(only_if_previous) == f"<OnlyIfPrevious: {is_greater!r} first_is_true=True>"
+        repr(only_if_previous) == f"<WithPrevious: {is_greater!r} first_is_true=True>"
     )
 
 
 def test_only_if_previous_sentinel_str() -> None:
     """Test the string representation of the sentinel value."""
-    only_if_previous = OnlyIfPrevious(always_true)
+    only_if_previous = WithPrevious(always_true)
 
     # Access the private attribute for testing purposes
     # pylint: disable=protected-access
