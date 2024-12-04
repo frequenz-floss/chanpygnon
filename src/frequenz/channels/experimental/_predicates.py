@@ -1,7 +1,7 @@
 # License: MIT
 # Copyright © 2024 Frequenz Energy-as-a-Service GmbH
 
-"""Predicates to be used in conjuntion with `Receiver.filter()`."""
+"""Composable predicate to cache and compare with the previous message."""
 
 
 from typing import Callable, Final, Generic, TypeGuard
@@ -21,9 +21,9 @@ _SENTINEL: Final[_Sentinel] = _Sentinel()
 
 
 class WithPrevious(Generic[ChannelMessageT]):
-    """A predicate to check if a message has a particular relationship with the previous one.
+    """A composable predicate to build predicates that can use also the previous message.
 
-    This predicate can be used to filter out messages based on a custom condition on the
+    This predicate can be used to filter messages based on a custom condition on the
     previous and current messages. This can be useful in cases where you want to
     process messages only if they satisfy a particular condition with respect to the
     previous message.
