@@ -64,7 +64,7 @@ dev-mypy = [
   # For checking the noxfile, docs/ script, and tests
   "frequenz-channels[dev-mkdocs,dev-noxfile,dev-pytest]",
   "mypy == 1.13.0",
-  "types-Markdown == 3.7.0.20240822",
+  "types-Markdown == 3.7.0.20241204",
 ]
 dev-noxfile = ["nox == 2024.10.9", "frequenz-repo-config[lib] == 0.11.0"]
 dev-pylint = [
