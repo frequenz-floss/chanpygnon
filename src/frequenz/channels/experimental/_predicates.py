@@ -85,6 +85,7 @@ class WithPrevious(Generic[ChannelMessageT]):
     def __init__(
         self,
         predicate: Callable[[ChannelMessageT, ChannelMessageT], bool],
+        /,
         *,
         first_is_true: bool = True,
     ) -> None:
