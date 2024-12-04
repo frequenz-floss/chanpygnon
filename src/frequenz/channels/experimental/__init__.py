@@ -10,8 +10,8 @@ Warning:
 """
 
 from ._pipe import Pipe
-from ._predicates import WithPrevious
 from ._relay_sender import RelaySender
+from ._with_previous import WithPrevious
 
 __all__ = [
     "WithPrevious",
