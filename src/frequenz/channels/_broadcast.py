@@ -267,7 +267,7 @@ class Broadcast(Generic[ChannelMessageT]):
         return _Sender(self)
 
     def new_receiver(
-        self, *, name: str | None = None, limit: int = 50
+        self, *, name: str | None = None, limit: int = 50, warn_on_overflow: bool = True
     ) -> Receiver[ChannelMessageT]:
         """Return a new receiver attached to this channel.
 
@@ -278,11 +278,15 @@ class Broadcast(Generic[ChannelMessageT]):
         Args:
             name: A name to identify the receiver in the logs.
             limit: Number of messages the receiver can hold in its buffer.
+            warn_on_overflow: Whether to log a warning when the receiver's
+                buffer is full and a message is dropped.
 
         Returns:
             A new receiver attached to this channel.
         """
-        recv: _Receiver[ChannelMessageT] = _Receiver(self, name=name, limit=limit)
+        recv: _Receiver[ChannelMessageT] = _Receiver(
+            self, name=name, limit=limit, warn_on_overflow=warn_on_overflow
+        )
         self._receivers[hash(recv)] = weakref.ref(recv)
         if self.resend_latest and self._latest is not None:
             recv.enqueue(self._latest)
@@ -371,7 +375,13 @@ class _Receiver(Receiver[_T]):
     """
 
     def __init__(
-        self, channel: Broadcast[_T], /, *, name: str | None, limit: int
+        self,
+        channel: Broadcast[_T],
+        /,
+        *,
+        name: str | None,
+        limit: int,
+        warn_on_overflow: bool,
     ) -> None:
         """Initialize this receiver.
 
@@ -387,7 +397,11 @@ class _Receiver(Receiver[_T]):
                 purposes, it will be shown in the string representation of the
                 receiver.
             limit: Number of messages the receiver can hold in its buffer.
+            warn_on_overflow: Whether to log a warning when the receiver's
+                buffer is full and a message is dropped.
         """
+        self._warn_on_overflow: bool = warn_on_overflow
+
         self._name: str = name if name is not None else f"{id(self):_}"
         """The name to identify the receiver.
 
@@ -412,10 +426,11 @@ class _Receiver(Receiver[_T]):
         """
         if len(self._q) == self._q.maxlen:
             self._q.popleft()
-            _logger.warning(
-                "Broadcast receiver [%s] is full. Oldest message was dropped.",
-                self,
-            )
+            if self._warn_on_overflow:
+                _logger.warning(
+                    "Broadcast receiver [%s] is full. Oldest message was dropped.",
+                    self,
+                )
         self._q.append(message)
 
     def __len__(self) -> int:
