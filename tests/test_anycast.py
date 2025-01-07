@@ -217,3 +217,30 @@ async def test_anycast_filter() -> None:
 
     assert (await receiver.receive()) == 12
     assert (await receiver.receive()) == 15
+
+
+async def test_anycast_close_receiver() -> None:
+    """Ensure closing a receiver stops the receiver."""
+    chan = Anycast[int](name="input-chan")
+    sender = chan.new_sender()
+
+    receiver_1 = chan.new_receiver()
+    receiver_2 = chan.new_receiver()
+
+    await sender.send(1)
+
+    assert (await receiver_1.receive()) == 1
+
+    receiver_1.close()
+
+    await sender.send(2)
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_1.receive()
+
+    assert (await receiver_2.receive()) == 2
+
+    receiver_2.close()
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_2.receive()
