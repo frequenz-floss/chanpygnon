@@ -1317,7 +1317,7 @@ value received by that receiver.  As soon as a value is received, its
 the latest value received.  The <code>get</code> method will raise an exception if called
 before any messages have been received from the receiver.</p>
 <p>Example:
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">frequenz.channels</span> <span class="kn">import</span> <span class="n">Broadcast</span><span class="p">,</span> <span class="n">LatestValueCache</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">frequenz.channels</span><span class="w"> </span><span class="kn">import</span> <span class="n">Broadcast</span><span class="p">,</span> <span class="n">LatestValueCache</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">channel</span> <span class="o">=</span> <span class="n">Broadcast</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;lvc_test&quot;</span><span class="p">)</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
