@@ -57,3 +57,51 @@ async def test_event() -> None:
     assert not event.is_set
 
     await event_task
+
+
+async def test_event_close_receiver() -> None:
+    """Ensure that closing an event stops the receiver."""
+    event = Event()
+    assert not event.is_set
+    assert not event.is_stopped
+
+    is_ready = False
+
+    async def wait_for_event() -> None:
+        nonlocal is_ready
+        await event.ready()
+        is_ready = True
+
+    event_task = _asyncio.create_task(wait_for_event())
+
+    await _asyncio.sleep(0)  # Yield so the wait_for_event task can run.
+
+    assert not is_ready
+    assert not event.is_set
+    assert not event.is_stopped
+
+    event.set()
+
+    await _asyncio.sleep(0)  # Yield so the wait_for_event task can run.
+    assert is_ready
+    assert event.is_set
+    assert not event.is_stopped
+
+    event.consume()
+    assert not event.is_set
+    assert not event.is_stopped
+    assert event_task.done()
+    assert event_task.result() is None
+    assert not event_task.cancelled()
+
+    event.close()
+    assert not event.is_set
+    assert event.is_stopped
+
+    await event.ready()
+    with _pytest.raises(ReceiverStoppedError):
+        event.consume()
+    assert event.is_stopped
+    assert not event.is_set
+
+    await event_task

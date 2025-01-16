@@ -54,6 +54,8 @@ import itertools
 from collections import deque
 from typing import Any
 
+from typing_extensions import override
+
 from ._generic import ReceiverMessageT_co
 from ._receiver import Receiver, ReceiverStoppedError
 
@@ -135,6 +137,7 @@ class Merger(Receiver[ReceiverMessageT_co]):
         await asyncio.gather(*self._pending, return_exceptions=True)
         self._pending = set()
 
+    @override
     async def ready(self) -> bool:
         """Wait until the receiver is ready with a message or an error.
 
@@ -171,6 +174,7 @@ class Merger(Receiver[ReceiverMessageT_co]):
                     asyncio.create_task(anext(self._receivers[name]), name=name)
                 )
 
+    @override
     def consume(self) -> ReceiverMessageT_co:
         """Return the latest message once `ready` is complete.
 
@@ -186,6 +190,21 @@ class Merger(Receiver[ReceiverMessageT_co]):
         assert self._results, "`consume()` must be preceded by a call to `ready()`"
 
         return self._results.popleft()
+
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        for task in self._pending:
+            if not task.done() and task.get_loop().is_running():
+                task.cancel()
+        self._pending = set()
+        for recv in self._receivers.values():
+            recv.close()
 
     def __str__(self) -> str:
         """Return a string representation of this receiver."""

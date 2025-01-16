@@ -9,6 +9,8 @@ to the senders it was created with.
 
 import typing
 
+from typing_extensions import override
+
 from .._generic import SenderMessageT_contra
 from .._sender import Sender
 
@@ -46,6 +48,7 @@ class RelaySender(typing.Generic[SenderMessageT_contra], Sender[SenderMessageT_c
         """
         self._senders = senders
 
+    @override
     async def send(self, message: SenderMessageT_contra, /) -> None:
         """Send a message.
 

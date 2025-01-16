@@ -13,6 +13,7 @@ import hypothesis
 import pytest
 from hypothesis import strategies as st
 
+from frequenz.channels import ReceiverStoppedError
 from frequenz.channels.timer import (
     SkipMissedAndDrift,
     SkipMissedAndResync,
@@ -329,6 +330,21 @@ async def test_timer_construction_wrong_args() -> None:
             start_delay=timedelta(seconds=1.0),
             loop=None,
         )
+
+
+async def test_timer_close_receiver() -> None:
+    """Test the autostart of a periodic timer."""
+    event_loop = asyncio.get_running_loop()
+
+    timer = Timer(timedelta(seconds=1.0), TriggerAllMissed())
+
+    drift = await timer.receive()
+    assert drift == pytest.approx(timedelta(seconds=0.0))
+    assert event_loop.time() == pytest.approx(1.0)
+
+    timer.close()
+    with pytest.raises(ReceiverStoppedError):
+        await timer.receive()
 
 
 async def test_timer_autostart() -> None:

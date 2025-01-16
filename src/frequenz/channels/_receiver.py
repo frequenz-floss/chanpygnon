@@ -157,6 +157,8 @@ from abc import ABC, abstractmethod
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Any, Generic, Self, TypeGuard, TypeVar, overload
 
+from typing_extensions import override
+
 from ._exceptions import Error
 from ._generic import MappedMessageT_co, ReceiverMessageT_co
 
@@ -214,6 +216,15 @@ class Receiver(ABC, Generic[ReceiverMessageT_co]):
             ReceiverStoppedError: If the receiver stopped producing messages.
             ReceiverError: If there is some problem with the receiver.
         """
+
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be available from the receiver.
+        Once the receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        raise NotImplementedError("close() must be implemented by subclasses")
 
     def __aiter__(self) -> Self:
         """Get an async iterator over the received messages.
@@ -433,6 +444,7 @@ class _Mapper(
         )
         """The function to apply on the input data."""
 
+    @override
     async def ready(self) -> bool:
         """Wait until the receiver is ready with a message or an error.
 
@@ -448,6 +460,7 @@ class _Mapper(
 
     # We need a noqa here because the docs have a Raises section but the code doesn't
     # explicitly raise anything.
+    @override
     def consume(self) -> MappedMessageT_co:  # noqa: DOC502
         """Return a transformed message once `ready()` is complete.
 
@@ -459,6 +472,16 @@ class _Mapper(
             ReceiverError: If there is a problem with the receiver.
         """
         return self._mapping_function(self._receiver.consume())
+
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        self._receiver.close()
 
     def __str__(self) -> str:
         """Return a string representation of the mapper."""
@@ -509,6 +532,7 @@ class _Filter(Receiver[ReceiverMessageT_co], Generic[ReceiverMessageT_co]):
 
         self._recv_closed = False
 
+    @override
     async def ready(self) -> bool:
         """Wait until the receiver is ready with a message or an error.
 
@@ -528,6 +552,7 @@ class _Filter(Receiver[ReceiverMessageT_co], Generic[ReceiverMessageT_co]):
         self._recv_closed = True
         return False
 
+    @override
     def consume(self) -> ReceiverMessageT_co:
         """Return a transformed message once `ready()` is complete.
 
@@ -546,6 +571,16 @@ class _Filter(Receiver[ReceiverMessageT_co], Generic[ReceiverMessageT_co]):
         message = self._next_message
         self._next_message = _SENTINEL
         return message
+
+    @override
+    def close(self) -> None:
+        """Close the receiver.
+
+        After calling this method, new messages will not be received.  Once the
+        receiver's buffer is drained, trying to receive a message will raise a
+        [`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+        """
+        self._receiver.close()
 
     def __str__(self) -> str:
         """Return a string representation of the filter."""

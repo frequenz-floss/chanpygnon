@@ -150,3 +150,40 @@ async def test_file_watcher_exit_iterator(tmp_path: pathlib.Path) -> None:
         file_watcher.consume()
 
     assert number_of_writes == expected_number_of_writes
+
+
+@pytest.mark.integration
+async def test_file_watcher_close_receiver(tmp_path: pathlib.Path) -> None:
+    """Ensure closing the file watcher stops the receiver.
+
+    Args:
+        tmp_path: A tmp directory to run the file watcher on. Created by pytest.
+    """
+    filename = tmp_path / "test-file"
+
+    number_of_writes = 0
+    expected_number_of_writes = 3
+
+    file_watcher = FileWatcher(
+        paths=[str(tmp_path)],
+        force_polling=True,
+        polling_interval=timedelta(seconds=0.05),
+    )
+    timer = Timer(timedelta(seconds=0.1), SkipMissedAndDrift())
+
+    async for selected in select(file_watcher, timer):
+        if selected_from(selected, timer):
+            filename.write_text(f"{selected.message}")
+        elif selected_from(selected, file_watcher):
+            number_of_writes += 1
+            if number_of_writes == expected_number_of_writes:
+                file_watcher.close()
+                break
+
+    ready = await file_watcher.ready()
+    assert ready is False
+
+    with pytest.raises(ReceiverStoppedError):
+        file_watcher.consume()
+
+    assert number_of_writes == expected_number_of_writes

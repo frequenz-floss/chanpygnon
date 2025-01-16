@@ -16,6 +16,8 @@ This module contains the following:
 
 import asyncio as _asyncio
 
+from typing_extensions import override
+
 from frequenz.channels._receiver import Receiver, ReceiverStoppedError
 
 
@@ -141,6 +143,7 @@ class Event(Receiver[None]):
         self._is_set = True
         self._event.set()
 
+    @override
     async def ready(self) -> bool:
         """Wait until this receiver is ready.
 
@@ -152,6 +155,7 @@ class Event(Receiver[None]):
         await self._event.wait()
         return not self._is_stopped
 
+    @override
     def consume(self) -> None:
         """Consume the event.
 
@@ -167,6 +171,11 @@ class Event(Receiver[None]):
 
         self._is_set = False
         self._event.clear()
+
+    @override
+    def close(self) -> None:
+        """Close this receiver."""
+        self.stop()
 
     def __str__(self) -> str:
         """Return a string representation of this event."""

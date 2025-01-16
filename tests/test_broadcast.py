@@ -232,6 +232,42 @@ async def test_broadcast_map() -> None:
     assert (await receiver.receive()) is True
 
 
+async def test_broadcast_map_close_receiver() -> None:
+    """Ensure closing a map stops the receiver."""
+    chan = Broadcast[int](name="input-chan")
+    sender = chan.new_sender()
+
+    receiver_1 = chan.new_receiver()
+    receiver_2 = chan.new_receiver()
+    plus_100_rx = receiver_1.map(lambda num: num + 100)
+
+    await sender.send(1)
+
+    assert (await plus_100_rx.receive()) == 101
+    assert (await receiver_2.receive()) == 1
+
+    plus_100_rx.close()
+
+    await sender.send(2)
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await plus_100_rx.receive()
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_1.receive()
+
+    assert (await receiver_2.receive()) == 2
+
+    await sender.send(3)
+
+    assert (await receiver_2.receive()) == 3
+
+    receiver_2.close()
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_2.receive()
+
+
 async def test_broadcast_filter() -> None:
     """Ensure filter keeps only the messages that pass the filter."""
     chan = Broadcast[int](name="input-chan")
@@ -247,6 +283,43 @@ async def test_broadcast_filter() -> None:
 
     assert (await receiver.receive()) == 12
     assert (await receiver.receive()) == 15
+
+
+async def test_broadcast_filter_close_receiver() -> None:
+    """Ensure closing a filter stops the receiver."""
+    chan = Broadcast[int](name="input-chan")
+    sender = chan.new_sender()
+
+    receiver_1 = chan.new_receiver()
+    receiver_2 = chan.new_receiver()
+
+    gt_10_rx = receiver_1.filter(lambda num: num > 10)
+
+    await sender.send(1)
+    assert (await receiver_2.receive()) == 1
+
+    await sender.send(100)
+    assert (await gt_10_rx.receive()) == 100
+    assert (await receiver_2.receive()) == 100
+
+    gt_10_rx.close()
+
+    await sender.send(2)
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await gt_10_rx.receive()
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_1.receive()
+
+    assert (await receiver_2.receive()) == 2
+
+    await sender.send(3)
+    assert (await receiver_2.receive()) == 3
+
+    receiver_2.close()
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_2.receive()
 
 
 async def test_broadcast_filter_type_guard() -> None:
@@ -320,3 +393,35 @@ async def test_type_variance() -> None:
 
     await sender.send(Narrower(10))
     assert (await receiver.receive()).value == 10
+
+
+async def test_broadcast_close_receiver() -> None:
+    """Ensure closing a receiver stops the receiver."""
+    chan = Broadcast[int](name="input-chan")
+    sender = chan.new_sender()
+
+    receiver_1 = chan.new_receiver()
+    receiver_2 = chan.new_receiver()
+
+    await sender.send(1)
+
+    assert (await receiver_1.receive()) == 1
+    assert (await receiver_2.receive()) == 1
+
+    receiver_1.close()
+
+    await sender.send(2)
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_1.receive()
+
+    assert (await receiver_2.receive()) == 2
+
+    await sender.send(3)
+
+    assert (await receiver_2.receive()) == 3
+
+    receiver_2.close()
+
+    with pytest.raises(ReceiverStoppedError):
+        _ = await receiver_2.receive()

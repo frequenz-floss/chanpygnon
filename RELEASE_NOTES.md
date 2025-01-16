@@ -10,7 +10,7 @@
 
 ## New Features
 
-<!-- Here goes the main new features and examples or instructions on how to use them -->
+- Added a `Receiver.close()` method for closing just a receiver.  Also implemented it for all the `Receiver` implementations in this library.
 
 ## Bug Fixes
 

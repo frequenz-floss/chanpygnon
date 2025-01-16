@@ -102,6 +102,8 @@ import abc
 import asyncio
 from datetime import timedelta
 
+from typing_extensions import override
+
 from ._receiver import Receiver, ReceiverStoppedError
 
 
@@ -644,6 +646,7 @@ class Timer(Receiver[timedelta]):
 
     # We need a noqa here because the docs have a Raises section but the documented
     # exceptions are raised indirectly.
+    @override
     async def ready(self) -> bool:  # noqa: DOC502
         """Wait until the timer `interval` passed.
 
@@ -715,6 +718,7 @@ class Timer(Receiver[timedelta]):
 
         return True
 
+    @override
     def consume(self) -> timedelta:
         """Return the latest drift once `ready()` is complete.
 
@@ -740,6 +744,11 @@ class Timer(Receiver[timedelta]):
         drift = self._current_drift
         self._current_drift = None
         return drift
+
+    @override
+    def close(self) -> None:
+        """Close the timer."""
+        self.stop()
 
     def _now(self) -> int:
         """Return the current monotonic clock time in microseconds.
