@@ -1,0 +1,2136 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Channel implementations for Python">
+      
+      
+        <meta name="author" content="Frequenz Energy-as-a-Service GmbH">
+      
+      
+      
+        <link rel="prev" href="../file-watchers/">
+      
+      
+        <link rel="next" href="../../../reference/frequenz/channels/">
+      
+      
+      <link rel="icon" href="../../../_img/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.49">
+    
+    
+      
+        <title>Timers - Frequenz channels</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../_css/style.css">
+    
+      <link rel="stylesheet" href="../../../_css/mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#timers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest (stable) version.
+  <a href="../../../..">
+    <strong>Click here to go to latest (stable) version</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Frequenz channels" class="md-header__button md-logo" aria-label="Frequenz channels" data-md-component="logo">
+      
+  <img src="../../../_img/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Frequenz channels
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Timers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/frequenz-floss/frequenz-channels-python" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    frequenz-channels-python
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../quick-start/" class="md-tabs__link">
+          
+  
+    
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../reference/frequenz/channels/" class="md-tabs__link">
+          
+  
+    
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../CONTRIBUTING/" class="md-tabs__link">
+        
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Frequenz channels" class="md-nav__button md-logo" aria-label="Frequenz channels" data-md-component="logo">
+      
+  <img src="../../../_img/logo.png" alt="logo">
+
+    </a>
+    Frequenz channels
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/frequenz-floss/frequenz-channels-python" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    frequenz-channels-python
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    User Guide
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            User Guide
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quick Start
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../channels/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Channels
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Channels
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../channels/anycast/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Anycast
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../channels/broadcast/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Broadcast
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sending/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sending
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../receiving/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Receiving
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Receiving
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../receiving/caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../receiving/synchronization/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Synchronization
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5_3" id="__nav_2_5_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Synchronization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../receiving/synchronization/merge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Merging
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../receiving/synchronization/select/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selecting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../error-handling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Error Handling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Utilities
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            Utilities
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../events/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../file-watchers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    File Watchers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Timers
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Timers
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frequenz.channels.timer--quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequenz.channels.timer--missed-ticks-and-drifting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missed Ticks And Drifting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missed Ticks And Drifting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#skip-missed-and-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skip Missed And Drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip-missed-and-re-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skip Missed And Re-Sync
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger-all-missed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trigger All Missed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-missed-tick-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Missed Tick Policies
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    frequenz
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            frequenz
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../reference/frequenz/channels/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    channels
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1_1" id="__nav_3_1_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            channels
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/frequenz/channels/event/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    event
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/frequenz/channels/experimental/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    experimental
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/frequenz/channels/file_watcher/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    file_watcher
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/frequenz/channels/timer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    timer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../CONTRIBUTING/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frequenz.channels.timer--quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#frequenz.channels.timer--missed-ticks-and-drifting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missed Ticks And Drifting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Missed Ticks And Drifting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Policies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#skip-missed-and-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skip Missed And Drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip-missed-and-re-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      Skip Missed And Re-Sync
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger-all-missed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trigger All Missed
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Timer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-missed-tick-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Missed Tick Policies
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="timers">Timers<a class="headerlink" href="#timers" title="Permanent link">¤</a></h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+
+    <div class="doc doc-contents first">
+
+        <p>A receiver that sends a message regularly.</p>
+<h2 id="frequenz.channels.timer--quick-start">Quick Start<a class="headerlink" href="#frequenz.channels.timer--quick-start" title="Permanent link">¤</a></h2>
+
+
+<details class="info" open>
+  <summary>Important</summary>
+  <p>This quick start is provided to have a quick feeling of how to use this module, but
+it is extremely important to understand how timers behave when they are delayed.</p>
+<p>We recommend emphatically to read about <a href="#frequenz.channels.timer--missed-ticks-and-drifting">missed ticks and
+drifting</a> before using timers in production.</p>
+</details>        <p>If you need to do something as periodically as possible (avoiding
+<a href="#frequenz.channels.timer--missed-ticks-and-drifting">drifts</a>), you can use
+a <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a> like this:</p>
+
+
+<details class="example" open>
+  <summary>Periodic Timer Example</summary>
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">frequenz.channels.timer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Timer</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">async</span> <span class="k">for</span> <span class="n">drift</span> <span class="ow">in</span> <span class="n">Timer</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">TriggerAllMissed</span><span class="p">()):</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The timer has triggered at </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="si">}</span><span class="s2"> with a drift of </span><span class="si">{</span><span class="n">drift</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></code></pre></div>
+<p>This timer will tick as close as every second as possible, even if the loop is busy
+doing something else for a good amount of time. In extreme cases, if the loop was
+busy for a few seconds, the timer will trigger a few times in a row to catch up, one
+for every missed tick.</p>
+</details>        <p>If, instead, you need a timeout, for example to abort waiting for other receivers after
+a certain amount of time, you can use a <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a> like
+this:</p>
+
+
+<details class="example" open>
+  <summary>Timeout Example</summary>
+  <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">frequenz.channels</span><span class="w"> </span><span class="kn">import</span> <span class="n">Anycast</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">selected_from</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">frequenz.channels.timer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Timer</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">channel</span> <span class="o">=</span> <span class="n">Anycast</span><span class="p">[</span><span class="nb">int</span><span class="p">](</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;data-channel&quot;</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">data_receiver</span> <span class="o">=</span> <span class="n">channel</span><span class="o">.</span><span class="n">new_receiver</span><span class="p">()</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">SkipMissedAndDrift</span><span class="p">())</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">async</span> <span class="k">for</span> <span class="n">selected</span> <span class="ow">in</span> <span class="n">select</span><span class="p">(</span><span class="n">data_receiver</span><span class="p">,</span> <span class="n">timer</span><span class="p">):</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="k">if</span> <span class="n">selected_from</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">data_receiver</span><span class="p">):</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Received data: </span><span class="si">{</span><span class="n">selected</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="n">timer</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">elif</span> <span class="n">selected_from</span><span class="p">(</span><span class="n">selected</span><span class="p">,</span> <span class="n">timer</span><span class="p">):</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="n">drift</span> <span class="o">=</span> <span class="n">selected</span><span class="o">.</span><span class="n">message</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No data received for </span><span class="si">{</span><span class="n">timer</span><span class="o">.</span><span class="n">interval</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">drift</span><span class="si">}</span><span class="s2"> seconds, giving up&quot;</span><span class="p">)</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="k">break</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></code></pre></div>
+<p>This timer will <em>rearm</em> itself automatically after it was triggered, so it will
+trigger again after the selected interval, no matter what the current drift was. So
+if the loop was busy for a few seconds, the timer will trigger immediately and then
+wait for another second before triggering again. The missed ticks are skipped.</p>
+</details>        <h2 id="frequenz.channels.timer--missed-ticks-and-drifting">Missed Ticks And Drifting<a class="headerlink" href="#frequenz.channels.timer--missed-ticks-and-drifting" title="Permanent link">¤</a></h2>
+<p>A <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a> can be used to send a messages at regular
+time intervals, but there is one fundamental issue with timers in the <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio">asyncio</a> world:
+the event loop could give control to another task at any time, and that task can take
+a long time to finish, making the time it takes the next timer message to be received
+longer than the desired interval.</p>
+<p>Because of this, it is very important for users to be able to understand and control
+how timers behave when they are delayed. Timers will handle missed ticks according to
+a <em>missing tick policy</em>.</p>
+<p>The following built-in policies are available:</p>
+<ul>
+<li><a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndDrift"><code>SkipMissedAndDrift</code></a>:
+    A policy that drops all the missed ticks, triggers immediately and resets.</li>
+<li><a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndResync"><code>SkipMissedAndResync</code></a>:
+    A policy that drops all the missed ticks, triggers immediately and resyncs.</li>
+<li><a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.TriggerAllMissed"><code>TriggerAllMissed</code></a>:
+    A policy that triggers all the missed ticks immediately until it catches up.</li>
+</ul>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h3 id="policies">Policies<a class="headerlink" href="#policies" title="Permanent link">¤</a></h3>
+<h4 id="skip-missed-and-drift">Skip Missed And Drift<a class="headerlink" href="#skip-missed-and-drift" title="Permanent link">¤</a></h4>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>A policy that drops all the missed ticks, triggers immediately and resets.</p>
+<p>The <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndDrift"><code>SkipMissedAndDrift</code></a> policy will
+behave effectively as if the timer was
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.reset">reset</a> every time it is triggered. This means
+the start time will change and the drift will be accumulated each time a tick is
+delayed. Only the relative drift will be returned on each tick.</p>
+<p>The reset happens only if the delay is larger than the
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndDrift.delay_tolerance">delay tolerance</a>, so it
+is possible to ignore small delays and not drift in those cases.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>This example represents a timer with interval 1 second and delay tolerance of
+0.1 seconds.</p>
+<ol>
+<li>
+<p>The first tick, <code>T0</code>, happens exactly at time 0.</p>
+</li>
+<li>
+<p>The second tick, <code>T1.2</code>, happens at time 1.2 (0.2 seconds late), so the timer
+    triggers immediately but drifts a bit (0.2 seconds), so the next tick is
+    expected at 2.2 seconds.</p>
+</li>
+<li>
+<p>The third tick, <code>T2.2</code>, happens at 2.3 seconds (0.1 seconds late), so it also
+    triggers immediately but <strong>it doesn't drift</strong> because the delay is <strong>under
+    the <code>delay_tolerance</code></strong>. The next tick is expected at 3.2 seconds.</p>
+</li>
+<li>
+<p>The fourth tick, <code>T4.2</code>, triggers at 4.3 seconds (1.1 seconds late), so it
+    also triggers immediately but the timer has drifted by 1.1 seconds, so a
+    potential tick <code>T3.2</code> is skipped (not triggered).</p>
+</li>
+<li>
+<p>The fifth tick, <code>T5.3</code>, triggers at 5.3 seconds so it is right on time (no
+    drift) and the same happens for tick <code>T6.3</code>, which triggers at 6.3 seconds.</p>
+</li>
+</ol>
+<p><center></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="584" height="144">    <style>        line, path, circle,rect,polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}            </style>    <defs>        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,0 0,4 4,2 0,0"></polygon>        </marker>        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>        </marker>        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="filled"></circle>        </marker>        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>        </marker>        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>        </marker>    </defs>    <rect class="backdrop" x="0" y="0" width="584" height="144"></rect>    <text x="2" y="28" >0</text>    <text x="82" y="28" >1</text>    <text x="162" y="28" >2</text>    <text x="242" y="28" >3</text>    <text x="322" y="28" >4</text>    <text x="402" y="28" >5</text>    <text x="482" y="28" >6</text>    <circle cx="4" cy="40" r="3" class="filled"></circle>    <line x1="8" y1="40" x2="80" y2="40" class="solid"></line>    <circle cx="84" cy="40" r="3" class="nofill"></circle>    <line x1="88" y1="40" x2="96" y2="40" class="solid"></line>    <circle cx="100" cy="40" r="3" class="filled"></circle>    <line x1="104" y1="40" x2="176" y2="40" class="solid"></line>    <line x1="164" y1="32" x2="164" y2="48" class="solid"></line>    <circle cx="180" cy="40" r="3" class="nofill"></circle>    <circle cx="188" cy="40" r="3" class="filled"></circle>    <line x1="192" y1="40" x2="256" y2="40" class="solid"></line>    <line x1="244" y1="32" x2="244" y2="48" class="solid"></line>    <circle cx="260" cy="40" r="4" class="nofill"></circle>    <line x1="264" y1="40" x2="336" y2="40" class="solid"></line>    <line x1="324" y1="32" x2="324" y2="48" class="solid"></line>    <circle cx="340" cy="40" r="3" class="nofill"></circle>    <circle cx="348" cy="40" r="3" class="filled"></circle>    <line x1="352" y1="40" x2="424" y2="40" class="solid"></line>    <line x1="404" y1="32" x2="404" y2="48" class="solid"></line>    <circle cx="428" cy="40" r="3" class="filled"></circle>    <line x1="432" y1="40" x2="504" y2="40" class="solid"></line>    <line x1="484" y1="32" x2="484" y2="48" class="solid"></line>    <circle cx="508" cy="40" r="3" class="filled"></circle>    <text x="2" y="60" >T0</text>    <text x="98" y="60" >T1.2</text>    <text x="186" y="60" >T2.2</text>    <text x="258" y="60" >T3.2</text>    <text x="346" y="60" >T4.2</text>    <text x="426" y="60" >T5.3</text>    <text x="506" y="60" >T6.3</text>    <text x="546" y="44" >time</text>    <line x1="0" y1="88" x2="8" y2="88" class="solid"></line>    <circle cx="12" cy="88" r="3" class="nofill"></circle>    <line x1="16" y1="88" x2="24" y2="88" class="solid"></line>    <line x1="0" y1="104" x2="8" y2="104" class="solid"></line>    <circle cx="12" cy="104" r="3" class="filled"></circle>    <line x1="16" y1="104" x2="24" y2="104" class="solid"></line>    <line x1="0" y1="120" x2="8" y2="120" class="solid"></line>    <circle cx="12" cy="120" r="4" class="nofill"></circle>    <line x1="16" y1="120" x2="24" y2="120" class="solid"></line>    <text x="34" y="92" >Expected ticks</text>    <text x="34" y="108" >Delivered ticks</text>    <text x="34" y="124" >Undelivered ticks (skipped)</text>    <g>        <line x1="512" y1="40" x2="528" y2="40" class="solid"></line>        <polygon points="528,36 536,40 528,44" class="filled"></polygon>    </g></svg></p>
+<p></center></p>
+</details>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h4 id="skip-missed-and-re-sync">Skip Missed And Re-Sync<a class="headerlink" href="#skip-missed-and-re-sync" title="Permanent link">¤</a></h4>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>A policy that drops all the missed ticks, triggers immediately and resyncs.</p>
+<p>If ticks are missed, the
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.SkipMissedAndResync"><code>SkipMissedAndResync</code></a> policy will
+make the <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a> trigger immediately and it will
+schedule to trigger again on the next multiple of the
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.interval">interval</a>, effectively skipping any missed
+ticks, but re-syncing with the original start time.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>This example represents a timer with interval 1 second.</p>
+<ol>
+<li>
+<p>The first tick <code>T0</code> happens exactly at time 0.</p>
+</li>
+<li>
+<p>The second tick, <code>T1</code>, happens at time 1.2 (0.2 seconds late), so it triggers
+    immediately. But it re-syncs, so the next tick is still expected at
+    2 seconds. This re-sync happens on every tick, so all ticks are expected at
+    multiples of 1 second, not matter how delayed they were.</p>
+</li>
+<li>
+<p>The third tick, <code>T2</code>, happens at time 2.3 (0.3 seconds late), so it also
+    triggers immediately.</p>
+</li>
+<li>
+<p>The fourth tick, <code>T3</code>, happens at time 4.3 (1.3 seconds late), so it also
+    triggers immediately, but there was also a tick expected at 4 seconds, <code>T4</code>,
+    which is skipped according to this policy to avoid bursts of ticks.</p>
+</li>
+<li>
+<p>The sixth tick, <code>T5</code>, happens at 5.1 (0.1 seconds late), so it triggers
+    immediately again.</p>
+</li>
+<li>
+<p>The seventh tick, <code>T6</code>, happens at 6.0, right on time.</p>
+</li>
+</ol>
+<p><center></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="584" height="144">    <style>        line, path, circle,rect,polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}            </style>    <defs>        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,0 0,4 4,2 0,0"></polygon>        </marker>        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>        </marker>        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="filled"></circle>        </marker>        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>        </marker>        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>        </marker>    </defs>    <rect class="backdrop" x="0" y="0" width="584" height="144"></rect>    <text x="2" y="28" >0</text>    <text x="82" y="28" >1</text>    <text x="162" y="28" >2</text>    <text x="242" y="28" >3</text>    <text x="322" y="28" >4</text>    <text x="354" y="28" >T4</text>    <text x="402" y="28" >5</text>    <text x="482" y="28" >6</text>    <circle cx="4" cy="40" r="3" class="filled"></circle>    <line x1="8" y1="40" x2="80" y2="40" class="solid"></line>    <circle cx="84" cy="40" r="3" class="nofill"></circle>    <line x1="88" y1="40" x2="96" y2="40" class="solid"></line>    <circle cx="100" cy="40" r="3" class="filled"></circle>    <line x1="104" y1="40" x2="160" y2="40" class="solid"></line>    <circle cx="164" cy="40" r="3" class="nofill"></circle>    <line x1="168" y1="40" x2="184" y2="40" class="solid"></line>    <circle cx="188" cy="40" r="3" class="filled"></circle>    <line x1="192" y1="40" x2="240" y2="40" class="solid"></line>    <circle cx="244" cy="40" r="3" class="nofill"></circle>    <line x1="248" y1="40" x2="320" y2="40" class="solid"></line>    <circle cx="324" cy="40" r="3" class="nofill"></circle>    <line x1="328" y1="40" x2="344" y2="40" class="solid"></line>    <circle cx="348" cy="40" r="3" class="filled"></circle>    <circle cx="356" cy="40" r="4" class="nofill"></circle>    <line x1="360" y1="40" x2="400" y2="40" class="solid"></line>    <circle cx="404" cy="40" r="3" class="nofill"></circle>    <line x1="408" y1="40" x2="416" y2="40" class="solid"></line>    <circle cx="420" cy="40" r="3" class="filled"></circle>    <line x1="424" y1="40" x2="480" y2="40" class="solid"></line>    <circle cx="484" cy="40" r="3" class="filled"></circle>    <text x="2" y="60" >T0</text>    <text x="98" y="60" >T1</text>    <text x="186" y="60" >T2</text>    <text x="346" y="60" >T3</text>    <text x="418" y="60" >T5</text>    <text x="482" y="60" >T6</text>    <text x="546" y="44" >time</text>    <line x1="0" y1="88" x2="8" y2="88" class="solid"></line>    <circle cx="12" cy="88" r="3" class="nofill"></circle>    <line x1="16" y1="88" x2="24" y2="88" class="solid"></line>    <line x1="0" y1="104" x2="8" y2="104" class="solid"></line>    <circle cx="12" cy="104" r="3" class="filled"></circle>    <line x1="16" y1="104" x2="24" y2="104" class="solid"></line>    <line x1="0" y1="120" x2="8" y2="120" class="solid"></line>    <circle cx="12" cy="120" r="4" class="nofill"></circle>    <line x1="16" y1="120" x2="24" y2="120" class="solid"></line>    <text x="34" y="92" >Expected ticks</text>    <text x="34" y="108" >Delivered ticks</text>    <text x="34" y="124" >Undelivered ticks (skipped)</text>    <g>        <line x1="488" y1="40" x2="528" y2="40" class="solid"></line>        <polygon points="528,36 536,40 528,44" class="filled"></polygon>    </g></svg></p>
+<p></center></p>
+</details>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h4 id="trigger-all-missed">Trigger All Missed<a class="headerlink" href="#trigger-all-missed" title="Permanent link">¤</a></h4>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>A policy that triggers all the missed ticks immediately until it catches up.</p>
+<p>The <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.TriggerAllMissed"><code>TriggerAllMissed</code></a> policy will
+trigger all missed ticks immediately until it catches up with the current time.
+This means that if the timer is delayed for any reason, when it finally gets some
+time to run, it will trigger all the missed ticks in a burst. The drift is not
+accumulated and the next tick will be scheduled according to the original start
+time.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>This example represents a timer with interval 1 second.</p>
+<ol>
+<li>
+<p>The first tick, <code>T0</code> happens exactly at time 0.</p>
+</li>
+<li>
+<p>The second tick, <code>T1</code>, happens at time 1.2 (0.2 seconds late), so it triggers
+    immediately. But it re-syncs, so the next tick is still expected at
+    2 seconds. This re-sync happens on every tick, so all ticks are expected at
+    multiples of 1 second, not matter how delayed they were.</p>
+</li>
+<li>
+<p>The third tick, <code>T2</code>, happens at time 2.3 (0.3 seconds late), so it also
+    triggers immediately.</p>
+</li>
+<li>
+<p>The fourth tick, <code>T3</code>, happens at time 4.3 (1.3 seconds late), so it also
+    triggers immediately.</p>
+</li>
+<li>
+<p>The fifth tick, <code>T4</code>, which was also already delayed (by 0.3 seconds),
+    triggers immediately too, resulting in a small <em>catch-up</em> burst.</p>
+</li>
+<li>
+<p>The sixth tick, <code>T5</code>, happens at 5.1 (0.1 seconds late), so it triggers
+    immediately again.</p>
+</li>
+<li>
+<p>The seventh tick, <code>T6</code>, happens at 6.0, right on time.</p>
+</li>
+</ol>
+<p><center></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="584" height="128">    <style>        line, path, circle,rect,polygon{stroke:black;stroke-width:2;stroke-opacity:1;fill-opacity:1;stroke-linecap:round;stroke-linejoin:miter;}text{font-family:monospace;font-size:14px;}rect.backdrop{stroke:none;fill:white;}.broken{stroke-dasharray:8;}.filled{fill:black;}.bg_filled{fill:white;}.nofill{fill:white;}.end_marked_arrow{marker-end:url(#arrow);}.start_marked_arrow{marker-start:url(#arrow);}.end_marked_diamond{marker-end:url(#diamond);}.start_marked_diamond{marker-start:url(#diamond);}.end_marked_circle{marker-end:url(#circle);}.start_marked_circle{marker-start:url(#circle);}.end_marked_open_circle{marker-end:url(#open_circle);}.start_marked_open_circle{marker-start:url(#open_circle);}.end_marked_big_open_circle{marker-end:url(#big_open_circle);}.start_marked_big_open_circle{marker-start:url(#big_open_circle);}            </style>    <defs>        <marker id="arrow" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,0 0,4 4,2 0,0"></polygon>        </marker>        <marker id="diamond" viewBox="-2 -2 8 8" refX="4" refY="2" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <polygon points="0,2 2,0 4,2 2,4 0,2"></polygon>        </marker>        <marker id="circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="filled"></circle>        </marker>        <marker id="open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="2" class="bg_filled"></circle>        </marker>        <marker id="big_open_circle" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">            <circle cx="4" cy="4" r="3" class="bg_filled"></circle>        </marker>    </defs>    <rect class="backdrop" x="0" y="0" width="584" height="128"></rect>    <text x="2" y="28" >0</text>    <text x="82" y="28" >1</text>    <text x="162" y="28" >2</text>    <text x="242" y="28" >3</text>    <text x="322" y="28" >4</text>    <text x="354" y="28" >T4</text>    <text x="402" y="28" >5</text>    <text x="482" y="28" >6</text>    <circle cx="4" cy="40" r="3" class="filled"></circle>    <line x1="8" y1="40" x2="80" y2="40" class="solid"></line>    <circle cx="84" cy="40" r="3" class="nofill"></circle>    <line x1="88" y1="40" x2="96" y2="40" class="solid"></line>    <circle cx="100" cy="40" r="3" class="filled"></circle>    <line x1="104" y1="40" x2="160" y2="40" class="solid"></line>    <circle cx="164" cy="40" r="3" class="nofill"></circle>    <line x1="168" y1="40" x2="184" y2="40" class="solid"></line>    <circle cx="188" cy="40" r="3" class="filled"></circle>    <line x1="192" y1="40" x2="240" y2="40" class="solid"></line>    <circle cx="244" cy="40" r="3" class="nofill"></circle>    <line x1="248" y1="40" x2="320" y2="40" class="solid"></line>    <circle cx="324" cy="40" r="3" class="nofill"></circle>    <line x1="328" y1="40" x2="344" y2="40" class="solid"></line>    <circle cx="348" cy="40" r="3" class="filled"></circle>    <circle cx="356" cy="40" r="3" class="filled"></circle>    <line x1="360" y1="40" x2="400" y2="40" class="solid"></line>    <circle cx="404" cy="40" r="3" class="nofill"></circle>    <circle cx="412" cy="40" r="3" class="filled"></circle>    <line x1="416" y1="40" x2="480" y2="40" class="solid"></line>    <circle cx="484" cy="40" r="3" class="filled"></circle>    <text x="2" y="60" >T0</text>    <text x="98" y="60" >T1</text>    <text x="186" y="60" >T2</text>    <text x="346" y="60" >T3</text>    <text x="410" y="60" >T5</text>    <text x="482" y="60" >T6</text>    <text x="546" y="44" >time</text>    <line x1="0" y1="88" x2="8" y2="88" class="solid"></line>    <circle cx="12" cy="88" r="3" class="nofill"></circle>    <line x1="16" y1="88" x2="24" y2="88" class="solid"></line>    <line x1="0" y1="104" x2="8" y2="104" class="solid"></line>    <circle cx="12" cy="104" r="3" class="filled"></circle>    <line x1="16" y1="104" x2="24" y2="104" class="solid"></line>    <text x="34" y="92" >Expected ticks</text>    <text x="34" y="108" >Delivered ticks</text>    <g>        <line x1="488" y1="40" x2="528" y2="40" class="solid"></line>        <polygon points="528,36 536,40 528,44" class="filled"></polygon>    </g></svg></p>
+<p></center></p>
+</details>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="timer">Timer<a class="headerlink" href="#timer" title="Permanent link">¤</a></h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>A receiver that sends a message regularly.</p>
+<p><a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer"><code>Timer</code></a>s are started by default after they are
+created. This can be disabled by using <code>auto_start=False</code> option when creating
+them. In this case, the timer will not be started until
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.reset"><code>reset()</code></a> is called. Receiving from the timer
+(either using <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.receive"><code>receive()</code></a> or using the
+async iterator interface) will also start the timer at that point.</p>
+<p>Timers need to be created in a context where
+a <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio"><code>asyncio</code></a> loop is already running. If no
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.loop"><code>loop</code></a> is specified, the current running loop
+is used.</p>
+<p>Timers can be stopped by calling <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.stop"><code>stop()</code></a>.
+A stopped timer will raise
+a <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/#frequenz.channels.ReceiverStoppedError"><code>ReceiverStoppedError</code></a> or stop the async
+iteration as usual.</p>
+<p>Once a timer is explicitly stopped, it can only be started again by explicitly
+calling <a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.reset"><code>reset()</code></a> (trying to receive from it
+or using the async iterator interface will keep failing).</p>
+<p>Timer messages are <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/datetime.html#datetime.timedelta"><code>timedelta</code></a>s containing the drift of the
+timer, i.e. the difference between when the timer should have triggered and the time
+when it actually triggered.</p>
+<p>This drift will likely never be <code>0</code>, because if there is a task that is
+running when it should trigger, the timer will be delayed. In this case the
+drift will be positive. A negative drift should be technically impossible,
+as the timer uses <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio"><code>asyncio</code></a>s loop monotonic clock.</p>
+
+
+<details class="warning" open>
+  <summary>Warning</summary>
+  <p>Even when the <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/asyncio.html#module-asyncio"><code>asyncio</code></a> loop's monotonic clock is a <a class="autorefs autorefs-external" href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a>, timers use
+<code>int</code>s to represent time internally. The internal time is tracked in
+microseconds, so the timer resolution is 1 microsecond
+(<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.interval"><code>interval</code></a> must be at least
+ 1 microsecond).</p>
+<p>This is to avoid floating point errors when performing calculations with time,
+which can lead to issues that are very hard to reproduce and debug.</p>
+</details>        <p>If the timer is delayed too much, then it will behave according to the
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.Timer.missed_tick_policy"><code>missed_tick_policy</code></a>. Missing
+ticks might or might not trigger a message and the drift could be accumulated or not
+depending on the chosen policy.</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div><h2 id="custom-missed-tick-policies">Custom Missed Tick Policies<a class="headerlink" href="#custom-missed-tick-policies" title="Permanent link">¤</a></h2>
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+    <div class="doc doc-contents first">
+
+
+        <p>A policy to handle timer missed ticks.</p>
+<p>To implement a custom policy you need to subclass
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.MissedTickPolicy"><code>MissedTickPolicy</code></a> and implement the
+<a class="autorefs autorefs-internal" href="../../../reference/frequenz/channels/timer/#frequenz.channels.timer.MissedTickPolicy.calculate_next_tick_time"><code>calculate_next_tick_time</code></a>
+method.</p>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <p>This policy will just wait one more second than the original interval if a
+tick is missed:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">WaitOneMoreSecond</span><span class="p">(</span><span class="n">MissedTickPolicy</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_next_tick_time</span><span class="p">(</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scheduled_tick_time</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="nb">int</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="k">return</span> <span class="n">scheduled_tick_time</span> <span class="o">+</span> <span class="n">interval</span> <span class="o">+</span> <span class="mi">1_000_000</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="n">interval</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="n">missed_tick_policy</span><span class="o">=</span><span class="n">WaitOneMoreSecond</span><span class="p">(),</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">async</span> <span class="k">for</span> <span class="n">drift</span> <span class="ow">in</span> <span class="n">timer</span><span class="p">:</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The timer has triggered with a drift of </span><span class="si">{</span><span class="n">drift</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</span></code></pre></div>
+</details>
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../file-watchers/" class="md-footer__link md-footer__link--prev" aria-label="Previous: File Watchers">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                File Watchers
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../reference/frequenz/channels/" class="md-footer__link md-footer__link--next" aria-label="Next: Index">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Index
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright © 2022 Frequenz Energy-as-a-Service GmbH
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/frequenz-floss" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/company/frequenz-com" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.annotate", "content.code.copy", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.top", "navigation.tracking", "toc.follow"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.88dd0f4e.min.js"></script>
+      
+    
+  </body>
+</html>
