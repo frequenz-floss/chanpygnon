@@ -123,6 +123,19 @@ except ReceiverError as error:
 # If we get here, the receiver was stopped
 ```
 
+# Closing receivers
+
+When a particular stream of data is no-longer required, it is a good practice to close
+the receiver to free up resources. This is especially important in applications that are
+repeatedly creating new receivers.  The
+[`Receiver.close()`][frequenz.channels.Receiver.close] method can be used for this
+purpose.
+
+After `close()` is called, we can still receive messages that are in the receiver's
+buffer, but as soon as the receiver's buffer has been drained, trying to receive further
+messages from a *closed* receiver will raise a
+[`ReceiverStoppedError`][frequenz.channels.ReceiverStoppedError].
+
 # Advanced Usage
 
 !!! Warning inline end
