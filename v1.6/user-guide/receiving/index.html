@@ -1313,6 +1313,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#frequenz.channels._receiver--closing-receivers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Closing receivers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#frequenz.channels._receiver--advanced-usage" class="md-nav__link">
     <span class="md-ellipsis">
       Advanced Usage
@@ -1415,6 +1424,16 @@ exception:</p>
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There was an error trying to receive: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1"># If we get here, the receiver was stopped</span>
 </span></code></pre></div>
+<h2 id="frequenz.channels._receiver--closing-receivers">Closing receivers<a class="headerlink" href="#frequenz.channels._receiver--closing-receivers" title="Permanent link">¤</a></h2>
+<p>When a particular stream of data is no-longer required, it is a good practice to close
+the receiver to free up resources. This is especially important in applications that are
+repeatedly creating new receivers.  The
+<a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.Receiver.close"><code>Receiver.close()</code></a> method can be used for this
+purpose.</p>
+<p>After <code>close()</code> is called, we can still receive messages that are in the receiver's
+buffer, but as soon as the receiver's buffer has been drained, trying to receive further
+messages from a <em>closed</em> receiver will raise a
+<a class="autorefs autorefs-internal" href="../../reference/frequenz/channels/#frequenz.channels.ReceiverStoppedError"><code>ReceiverStoppedError</code></a>.</p>
 <h2 id="frequenz.channels._receiver--advanced-usage">Advanced Usage<a class="headerlink" href="#frequenz.channels._receiver--advanced-usage" title="Permanent link">¤</a></h2>
 <div class="admonition warning inline end">
 <p class="admonition-title">Warning</p>
